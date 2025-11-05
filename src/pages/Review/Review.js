@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Review.css';
 
 const Review = () => {
@@ -12,16 +12,35 @@ const Review = () => {
   });
   const [hoverRating, setHoverRating] = useState(0);
   const [contactMethod, setContactMethod] = useState('email');
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Função para carregar reviews do banco
+  const loadReviews = async () => {
+    try {
+      const response = await fetch('/.netlify/functions/get-reviews');
+      const result = await response.json();
+      
+      if (response.ok) {
+        setReviews(result.reviews || []);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar avaliações:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Carregar reviews quando o componente montar
+  useEffect(() => {
+    loadReviews();
+  }, []);
 
   // Função para formatar o telefone no padrão (00) 00000-0000
   const formatPhoneNumber = (value) => {
-    // Remove tudo que não é número
     const numbers = value.replace(/\D/g, '');
-    
-    // Limita a 11 dígitos (DDD + 9 dígitos)
     const limitedNumbers = numbers.slice(0, 11);
     
-    // Aplica a formatação
     if (limitedNumbers.length <= 2) {
       return limitedNumbers;
     } else if (limitedNumbers.length <= 6) {
@@ -38,7 +57,6 @@ const Review = () => {
     
     let newValue = value;
     
-    // Aplica formatação automática para telefone
     if (name === 'phone') {
       newValue = formatPhoneNumber(value);
     }
@@ -56,50 +74,53 @@ const Review = () => {
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const payload = {
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    rating: formData.rating,
-    comment: formData.comment,
-    consent: formData.consent,
-    contactMethod: contactMethod
-  };
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      rating: formData.rating,
+      comment: formData.comment,
+      consent: formData.consent,
+      contactMethod: contactMethod
+    };
 
-  try {
-    // quando estiver no Netlify, esse caminho funciona
-    const response = await fetch('/.netlify/functions/save-review', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const response = await fetch('/.netlify/functions/save-review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err.error || 'Erro ao enviar avaliação');
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.error || 'Erro ao enviar avaliação');
+      }
+
+      alert('Obrigado pela sua avaliação!');
+
+      // Limpa o form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        rating: 0,
+        comment: '',
+        consent: false
+      });
+      setHoverRating(0);
+      setContactMethod('email');
+
+      // Recarrega as avaliações para mostrar a nova
+      await loadReviews();
+
+    } catch (error) {
+      console.error(error);
+      alert('Não foi possível enviar agora. Tente novamente.');
     }
-
-    alert('Obrigado pela sua avaliação!');
-
-    // limpa o form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      rating: 0,
-      comment: '',
-      consent: false
-    });
-    setHoverRating(0);
-    setContactMethod('email');
-  } catch (error) {
-    console.error(error);
-    alert('Não foi possível enviar agora. Tente novamente.');
-  }
-};
+  };
 
   // Componente de Estrelas Interativas
   const StarRating = () => {
@@ -125,6 +146,11 @@ const handleSubmit = async (e) => {
     );
   };
 
+  // Função para mostrar estrelas na lista de reviews
+  const renderStars = (rating) => {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  };
+
   return (
     <div className="review-page">
       <div className="container">
@@ -145,45 +171,45 @@ const handleSubmit = async (e) => {
                 />
               </div>
               
-             <div className="form-group">
-  <label>Como prefere ser contatado? *</label>
-  <div className="contact-method">
-    <div className="radio-option">
-      <input
-        type="radio"
-        id="email-contact"
-        name="contactMethod"
-        value="email"
-        checked={contactMethod === 'email'}
-        onChange={(e) => setContactMethod(e.target.value)}
-        required
-      />
-      <label htmlFor="email-contact" className="radio-label">
-        <span className="icon-text">
-          <img src="/images/icons/email.png" alt="Email" className="contact-icon" />
-          Email
-        </span>
-      </label>
-    </div>
-    <div className="radio-option">
-      <input
-        type="radio"
-        id="phone-contact"
-        name="contactMethod"
-        value="phone"
-        checked={contactMethod === 'phone'}
-        onChange={(e) => setContactMethod(e.target.value)}
-        required
-      />
-      <label htmlFor="phone-contact" className="radio-label">
-        <span className="icon-text">
-          <img src="/images/icons/telefone.png" alt="Telefone" className="contact-icon" />
-          Telefone
-        </span>
-      </label>
-    </div>
-  </div>
-</div>
+              <div className="form-group">
+                <label>Como prefere ser contatado? *</label>
+                <div className="contact-method">
+                  <div className="radio-option">
+                    <input
+                      type="radio"
+                      id="email-contact"
+                      name="contactMethod"
+                      value="email"
+                      checked={contactMethod === 'email'}
+                      onChange={(e) => setContactMethod(e.target.value)}
+                      required
+                    />
+                    <label htmlFor="email-contact" className="radio-label">
+                      <span className="icon-text">
+                        <img src="/images/icons/email.png" alt="Email" className="contact-icon" />
+                        Email
+                      </span>
+                    </label>
+                  </div>
+                  <div className="radio-option">
+                    <input
+                      type="radio"
+                      id="phone-contact"
+                      name="contactMethod"
+                      value="phone"
+                      checked={contactMethod === 'phone'}
+                      onChange={(e) => setContactMethod(e.target.value)}
+                      required
+                    />
+                    <label htmlFor="phone-contact" className="radio-label">
+                      <span className="icon-text">
+                        <img src="/images/icons/telefone.png" alt="Telefone" className="contact-icon" />
+                        Telefone
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
               
               <div className="form-group">
                 <label htmlFor={contactMethod}>
@@ -237,38 +263,39 @@ const handleSubmit = async (e) => {
               <button 
                 type="submit" 
                 className="btn-submit"
-                disabled={formData.rating === 0} // Desabilita se não tiver avaliação
+                disabled={formData.rating === 0}
               >
-                 Enviar Avaliação
+                Enviar Avaliação
               </button>
             </form>
           </div>
-          
+
+          {/* SEÇÃO DE AVALIAÇÕES REAIS */}
           <div className="reviews-list">
             <h2>Avaliações Recentes</h2>
-            <div className="review-item">
-              <div className="review-header">
-                <h3>Maria Silva</h3>
-                <div className="rating">★★★★★</div>
-              </div>
-              <p>"Adorei os espetos! Ambiente muito agradável e atendimento excelente."</p>
-            </div>
             
-            <div className="review-item">
-              <div className="review-header">
-                <h3>João Santos</h3>
-                <div className="rating">★★★★☆</div>
-              </div>
-              <p>"A parmegiana simplesmente estava deliciosa! Voltarei com certeza."</p>
-            </div>
-
-            <div className="review-item">
-              <div className="review-header">
-                <h3>Ana Costa</h3>
-                <div className="rating">★★★★★</div>
-              </div>
-              <p>"Happy hour incrível! Drinks bem feitos e petiscos de qualidade."</p>
-            </div>
+            {loading ? (
+              <p className="loading-text">Carregando avaliações...</p>
+            ) : reviews.length === 0 ? (
+              <p className="no-reviews">Seja o primeiro a avaliar!</p>
+            ) : (
+              reviews.map(review => (
+                <div key={review.id} className="review-item">
+                  <div className="review-header">
+                    <h3>{review.nome}</h3>
+                    <div className="rating">
+                      {renderStars(review.nota)}
+                    </div>
+                  </div>
+                  {review.comentario && (
+                    <p className="review-comment">"{review.comentario}"</p>
+                  )}
+                  <small className="review-date">
+                    {new Date(review.data_avaliacao).toLocaleDateString('pt-BR')}
+                  </small>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
