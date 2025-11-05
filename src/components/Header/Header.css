@@ -1,0 +1,399 @@
+@import '../../styles/variables.css';
+
+.header {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  background-color: var(--primary-brown);
+  color: var(--light-text);
+  padding: var(--spacing-sm) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+.mobile-info {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* ====== DESKTOP / BASE ====== */
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--spacing-md);
+}
+
+/* Logo */
+.logo {
+  color: var(--light-text);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.logo-image {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.logo-text h1 {
+  font-size: 3rem;
+  margin-bottom: 0.1rem;
+  color: var(--light-text);
+  font-weight: bold;
+  line-height: 1.1;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.logo-text span {
+  font-size: 1rem;
+  opacity: 0.9;
+  color: var(--cream);
+  font-style: italic;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* Navegação (desktop) - AJUSTADO para caber todos os itens */
+.nav-center {
+  display: flex;
+  gap: 1.5rem; /* Reduzido o gap */
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem 1rem; /* Reduzido o padding */
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-wrap: nowrap; /* Garante que fique em uma linha */
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-center a {
+  color: var(--light-text);
+  text-decoration: none;
+  padding: 0.4rem 0.7rem; /* Reduzido o padding */
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.85rem; /* Fonte ligeiramente menor */
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Reduzido o gap entre ícone e texto */
+}
+
+.nav-center a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.nav-center a:hover::before {
+  left: 100%;
+}
+
+.nav-center a:hover,
+.nav-center a.active {
+  background-color: var(--light-brown);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Informações desktop (direita) */
+.header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: var(--light-text);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* todas as linhas em negrito no desktop também */
+.info-item span {
+  font-weight: 600;
+}
+
+/* Botão mobile (esconde no desktop) */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--light-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* barra mobile some no desktop */
+.mobile-info {
+  display: none;
+}
+
+/* ====== ÍCONES ====== */
+.header-icon {
+  width: 16px; /* Ícones ligeiramente menores */
+  height: 16px;
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+  filter: brightness(100%) saturate(100%) invert(100%) sepia(100%) saturate(100%);
+  opacity: 0.95;
+}
+
+.mobile-menu-btn .header-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ====== BREAKPOINT 1024 ====== */
+@media (max-width: 1024px) {
+  .header .container {
+    gap: var(--spacing-md);
+  }
+
+  .logo-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .logo-text h1 {
+    font-size: 1.7rem;
+  }
+
+  .logo-text span {
+    font-size: 0.85rem;
+  }
+
+  .nav-center {
+    padding: 0.4rem 0.8rem; /* Ainda mais compacto */
+    gap: 0.2rem;
+  }
+
+  .nav-center a {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem; /* Fonte ainda menor em telas médias */
+  }
+  
+  .header-icon {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* ====== BREAKPOINT 900 (mantém desktop) ====== */
+@media (max-width: 900px) {
+  .header .container {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .nav-center {
+    order: 3;
+    width: 100%;
+    margin-top: var(--spacing-sm);
+    justify-content: center;
+    border-radius: 25px;
+    gap: 0.5rem; /* Gap normal para mobile */
+    padding: 0.6rem 1rem;
+  }
+
+  .nav-center a {
+    font-size: 0.85rem; /* Volta ao tamanho normal em mobile */
+    padding: 0.5rem 0.8rem;
+  }
+
+  .header-info {
+    order: 2;
+    align-items: flex-end;
+  }
+}
+
+/* =================================================
+   ====== AQUI COMEÇA O RESPONSIVO DE VERDADE ======
+   ====== (apenas mobile, não mexe no desktop) =====
+   ================================================= */
+@media (max-width: 768px) {
+  /* mostra o botão hamburguer */
+  .mobile-menu-btn {
+    display: block;
+    order: 2;
+  }
+
+  /* esconde nav horizontal e vira dropdown */
+  .nav-center {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    background: var(--primary-brown);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 99;
+  }
+
+  .nav-center.active {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .nav-center a {
+    width: 100%;
+    justify-content: center;
+    padding: var(--spacing-sm);
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+
+  /* some o bloco da direita no mobile */
+  .header-info {
+    display: none;
+  }
+
+  /* ===== barra de infos abaixo do logo (MOBILE) ===== */
+  .mobile-info {
+    display: block;
+    order: 3;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-top: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .mobile-info-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+  }
+
+  /* linha de cima: taxa + couvert */
+  .mobile-info-row-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 12px;
+    row-gap: 4px;
+    text-align: center;
+    width: 100%;
+    line-height: 1.3;
+    font-size: 0.75rem;
+    color: var(--light-text);
+  }
+
+  /* linha de baixo: Wi-Fi */
+  .mobile-info-row-bottom {
+    text-align: center;
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: var(--light-text);
+    white-space: nowrap;
+  }
+
+  .mobile-info-iconline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ====== AQUI o que você pediu: TODOS em negrito ====== */
+  .mobile-info-row-top .no-tax span,
+  .mobile-info-row-top .cover-charge span,
+  .mobile-info-row-bottom span {
+    font-weight: 600 !important;
+  }
+
+  /* garante que ícone + texto mantenham o mesmo peso */
+  .mobile-info span {
+    font-weight: 600 !important;
+  }
+
+  /* tamanho do logo no mobile fica igual ao seu original */
+  .logo-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .logo-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .logo-text span {
+    font-size: 0.8rem;
+  }
+}
+
+/* ====== MOBILE BEM PEQUENO ====== */
+@media (max-width: 480px) {
+  .mobile-info {
+    padding: 8px;
+    border-radius: 6px;
+    margin-top: 6px;
+  }
+
+  .mobile-info-row-top {
+    font-size: 0.7rem;
+    column-gap: 8px;
+  }
+
+  .mobile-info-row-bottom {
+    font-size: 0.65rem;
+  }
+}

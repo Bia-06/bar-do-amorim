@@ -1,0 +1,93 @@
+.ambiente-page {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.ambiente-page h1 {
+  color: var(--primary-brown);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.page-subtitle {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.galeria-ambiente {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.foto-item {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.foto-item:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.foto-ambiente {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+.foto-item:hover .foto-ambiente {
+  transform: scale(1.05);
+}
+
+.foto-descricao {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--primary-brown);
+  font-weight: 600;
+  margin: 0;
+  font-size: 1.1rem;
+  background: white;
+  position: relative;
+  z-index: 1;
+}
+
+/* responsivo pequeno */
+@media (max-width: 480px) {
+  .ambiente-page h1 {
+    font-size: 2rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+
+  .foto-ambiente {
+    height: 220px;
+  }
+
+  .foto-descricao {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,371 @@
+.review-page {
+  padding: 3rem 0;
+  flex: 1;
+}
+
+.review-page h1 {
+  color: var(--primary-brown);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.review-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.review-form {
+  background-color: var(--light-text);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--primary-brown);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+  background-color: #fafafa;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-brown);
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+/* ===== MÉTODO DE CONTATO ===== */
+.contact-method {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 18px;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+  flex: 1;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 12px;
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  padding-left: 3rem; /* Espaço para o radio button */
+}
+
+.radio-label::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.radio-option input[type="radio"]:checked + .radio-label::before {
+  border-color: var(--primary-brown);
+  background-color: var(--primary-brown);
+  box-shadow: inset 0 0 0 3px white;
+}
+
+.radio-label:hover {
+  border-color: var(--light-brown);
+  background-color: #f5f5f5;
+}
+
+.radio-option input[type="radio"]:checked + .radio-label {
+  border-color: var(--primary-brown);
+  background-color: rgba(139, 69, 19, 0.05);
+}
+
+.radio-option input[type="radio"]:checked + .radio-label .icon-text {
+  color: var(--primary-brown);
+  font-weight: 600;
+}
+
+.radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+/* ===== ÍCONES DE CONTATO ===== */
+.icon-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0.8);
+  transition: all 0.3s ease;
+}
+
+.radio-option input[type="radio"]:checked + .radio-label .contact-icon {
+  filter: brightness(1) sepia(1) hue-rotate(-10deg) saturate(5);
+}
+
+.radio-label:hover .contact-icon {
+  filter: brightness(1);
+}
+
+/* ===== Estrelas ===== */
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.2rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.star.filled {
+  color: #ffc107;
+  text-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+}
+
+.rating-text {
+  margin-left: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ===== CONSENTIMENTO (checkbox em cima, texto embaixo, centralizado) ===== */
+.form-group.consent-group {
+  width: 100%;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.checkbox-label {
+  display: flex;
+  flex-direction: column;     /* <- isso que põe a caixa em cima */
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: block;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #8b4513;
+  border-radius: 6px;
+  background: #fff;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+  background: #8b4513;
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+/* ===== Botão ===== */
+.btn-submit {
+  background: linear-gradient(135deg, var(--light-brown), var(--lighter-brown));
+  color: var(--light-text);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, var(--lighter-brown), var(--light-brown));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+}
+
+/* ===== Lista de avaliações ===== */
+.reviews-list {
+  background-color: var(--light-text);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.reviews-list h2 {
+  color: var(--primary-brown);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.review-item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.review-header h3 {
+  color: var(--primary-brown);
+  font-size: 1.1rem;
+}
+
+.rating {
+  color: gold;
+  font-size: 1.2rem;
+}
+
+/* ======= RESPONSIVO ======= */
+@media (max-width: 768px) {
+  .review-page {
+    padding: 2rem 0;
+  }
+
+  .review-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .review-form,
+  .reviews-list {
+    padding: 2rem 1.25rem;
+  }
+
+  .contact-method {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  /* consentimento continua centralizado no mobile */
+  .form-group.consent-group {
+    flex-direction: column;
+  }
+
+  .checkbox-label {
+    max-width: 280px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    max-width: 280px;
+    margin: 0.5rem auto 0 auto;
+    display: block;
+  }
+
+  .review-page,
+  .review-page .container,
+  .review-form {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-submit:disabled:hover {
+  transform: none !important;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3) !important;
+}
+/* ===== ÍCONES DE CONTATO ===== */
+.icon-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0.8);
+  transition: all 0.3s ease;
+}
+
+.radio-option input[type="radio"]:checked + .radio-label .contact-icon {
+  filter: brightness(1) sepia(1) hue-rotate(-10deg) saturate(5);
+}
+
+.radio-label:hover .contact-icon {
+  filter: brightness(1);
+}

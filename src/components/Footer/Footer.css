@@ -1,0 +1,378 @@
+@import '../../styles/variables.css';
+
+.footer {
+  background-color: var(--primary-brown);
+  color: var(--light-text);
+  padding: 3rem 0 1rem;
+  margin-top: auto;
+}
+
+.footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section h3 {
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-section p {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  opacity: 0.9;
+  display: flex;
+  align-items: center; /* MUDANÇA: center em vez de flex-start */
+  gap: 0.5rem;
+}
+
+/* Ícones do footer */
+.footer-icon {
+  font-size: 1.1rem;
+  filter: brightness(0.9) saturate(1.2);
+}
+
+.contact-icon {
+  font-size: 0.9rem;
+  min-width: 20px;
+  filter: brightness(0.9) saturate(1.2);
+  flex-shrink: 0;
+}
+.footer-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+  filter:
+    brightness(0)
+    invert(88%)
+    sepia(28%)
+    saturate(320%)
+    hue-rotate(-10deg);
+  opacity: 0.9;
+}
+/* Redes Sociais */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--light-text);
+  text-decoration: none;
+  padding: 0.2rem 0;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.social-link:hover {
+  color: var(--accent-gold);
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.social-link svg {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover svg {
+  transform: scale(1.1);
+}
+.social-link svg {
+  color: var(--accent-gold);   /* força ícone social a ficar dourado */
+  fill: currentColor;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVO - VERSÃO CORRIGIDA */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 0 1rem;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+  
+  .footer-section {
+    align-items: center;
+  }
+  
+  .footer-section h3 {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .footer-section p {
+    justify-content: flex-start; /* MUDANÇA: alinha à esquerda */
+    text-align: left; /* MUDANÇA: texto à esquerda */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 280px; /* LIMITA A LARGURA */
+    display: flex;
+    align-items: center; /* MANTÉM EMOJI E TEXTO NA MESMA LINHA */
+    gap: 0.5rem;
+    flex-direction: row; /* GARANTE QUE FIQUE NA MESMA LINHA */
+  }
+  
+  .social-links {
+    align-items: center;
+  }
+  
+  .social-link {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer .container {
+    padding: 0 1.5rem;
+  }
+  
+  .footer-content {
+    gap: 2rem;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.1rem;
+  }
+  
+  .footer-section p {
+    font-size: 0.9rem;
+    flex-direction: row; /* GARANTE EMOJI AO LADO DO TEXTO */
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    max-width: 260px;
+  }
+  
+  /* ESPECIAL PARA O E-MAIL */
+  .footer-section p:last-child {
+    flex-direction: row; /* MANTÉM EMOJI AO LADO DO EMAIL */
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  
+  .contact-icon {
+    margin-bottom: 0;
+  }
+}
+/* AJUSTE MOBILE: centralizar tudo bonitinho */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+    justify-items: center;          /* força cada coluna a ficar centralizada */
+  }
+
+  .footer-section {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 320px;               /* largura confortável pra leitura */
+  }
+
+  .footer-section h3 {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* cada linha de texto/contato/funcionamento */
+  .footer-section p {
+    display: flex;
+    align-items: flex-start;        /* ícone começa alinhado ao topo da linha */
+    justify-content: center;        /* centraliza o grupo todo (ícone + texto) */
+    text-align: left;               /* texto continua legível em múltiplas linhas */
+    gap: 0.5rem;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    line-height: 1.4;
+  }
+
+  /* ícone (emoji) fica fixo na esquerda da linha */
+  .contact-icon {
+    flex-shrink: 0;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  /* redes sociais */
+  .social-links {
+    align-items: center;
+    width: 100%;
+  }
+
+  .social-link {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* telas MUITO pequenas ainda mais centradas */
+@media (max-width: 480px) {
+  .footer .container {
+    padding: 0 1.25rem;
+  }
+
+  .footer-content {
+    gap: 1.8rem;
+  }
+
+  .footer-section {
+    max-width: 300px;
+  }
+
+  .footer-section h3 {
+    font-size: 1.05rem;
+  }
+
+  .footer-section p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    flex-wrap: nowrap;
+  }
+
+  .contact-icon {
+    min-width: 18px;
+    font-size: 0.9rem;
+  }
+
+  .social-link {
+    font-size: 0.9rem;
+  }
+
+  .social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footer-bottom p {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+}
+/* Ajustes finos para mobile */
+@media (max-width: 768px) {
+  /* Centraliza melhor a linha longa do endereço */
+  .footer-section:nth-child(1) p:last-child {
+    text-align: center;
+    justify-content: center;
+    line-height: 1.4;
+    white-space: normal; /* permite quebrar corretamente */
+  }
+
+  /* Corrige o alinhamento do (exceto feriados) */
+  .footer-section:nth-child(2) p:last-child {
+    flex-direction: column; /* quebra a linha */
+    align-items: center;
+    text-align: center;
+    gap: 0.2rem;
+    line-height: 1.3;
+  }
+
+  /* Deixa telefone e WhatsApp mais próximos do ":" */
+  .footer-section:nth-child(3) p {
+    gap: 0.25rem; /* antes era 0.5rem */
+    justify-content: center;
+  }
+
+  /* Garante que o texto do contato não fique muito espaçado */
+  .footer-section:nth-child(3) p span:not(.contact-icon) {
+    display: inline-block;
+    margin-left: 0.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajuste adicional para telas pequenas */
+  .footer-section:nth-child(2) p:last-child {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .footer-section:nth-child(3) p {
+    font-size: 0.9rem;
+    gap: 0.2rem;
+  }
+}
+/* AJUSTE FINO HAPPY HOUR MOBILE */
+@media (max-width: 768px) {
+  /* Corrige apenas a linha do Happy Hour */
+  .footer-section:nth-child(2) p:last-child {
+    flex-direction: row;           /* 🍺 fica na mesma linha */
+    flex-wrap: wrap;               /* permite quebrar linha se necessário */
+    justify-content: center;       /* centraliza o conjunto */
+    text-align: center;
+    line-height: 1.4;
+    gap: 0.4rem;
+  }
+
+  /* Centraliza o (exceto feriados) embaixo */
+  .footer-section:nth-child(2) p:last-child::after {
+    content: " (exceto feriados)";
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 2px;
+    opacity: 0.9;
+  }
+
+  /* Remove o (exceto feriados) duplicado do texto original */
+  .footer-section:nth-child(2) p:last-child {
+    white-space: normal;
+  }
+  .footer-section:nth-child(2) p:last-child span:not(.contact-icon) {
+    white-space: normal;
+  }
+}
