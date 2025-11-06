@@ -270,32 +270,34 @@ const Review = () => {
             </form>
           </div>
 
-          {/* SEÇÃO DE AVALIAÇÕES REAIS */}
+          {/* SEÇÃO DE AVALIAÇÕES REAIS - COM DIV DE CONTEÚDO PARA SCROLL */}
           <div className="reviews-list">
             <h2>Avaliações Recentes</h2>
             
-            {loading ? (
-              <p className="loading-text">Carregando avaliações...</p>
-            ) : reviews.length === 0 ? (
-              <p className="no-reviews">Seja o primeiro a avaliar!</p>
-            ) : (
-              reviews.map(review => (
-                <div key={review.id} className="review-item">
-                  <div className="review-header">
-                    <h3>{review.nome}</h3>
-                    <div className="rating">
-                      {renderStars(review.nota)}
+            <div className="reviews-content">
+              {loading ? (
+                <p className="loading-text">Carregando avaliações...</p>
+              ) : reviews.length === 0 ? (
+                <p className="no-reviews">Seja o primeiro a avaliar!</p>
+              ) : (
+                reviews.map(review => (
+                  <div key={review.id} className="review-item">
+                    <div className="review-header">
+                      <h3>{review.nome}</h3>
+                      <div className="rating">
+                        {renderStars(review.nota)}
+                      </div>
                     </div>
+                    {review.comentario && (
+                      <p className="review-comment">"{review.comentario}"</p>
+                    )}
+                    <small className="review-date">
+                      {new Date(review.data_avaliacao).toLocaleDateString('pt-BR')}
+                    </small>
                   </div>
-                  {review.comentario && (
-                    <p className="review-comment">"{review.comentario}"</p>
-                  )}
-                  <small className="review-date">
-                    {new Date(review.data_avaliacao).toLocaleDateString('pt-BR')}
-                  </small>
-                </div>
-              ))
-            )}
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>
