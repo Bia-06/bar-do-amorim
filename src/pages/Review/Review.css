@@ -11,16 +11,18 @@
   font-weight: bold;
 }
 
+/* ===== LAYOUT PRINCIPAL CORRIGIDO ===== */
 .review-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: start;
+  align-items: stretch; /* Alterado para stretch */
+  min-height: 650px; /* Altura mínima do container */
 }
 
-/* ===== FORMULÁRIO E LISTA - MESMO ESTILO ===== */
+/* ===== FORMULÁRIO E LISTA - MESMA ALTURA ===== */
 .review-form,
 .reviews-list {
   background-color: var(--light-text);
@@ -28,19 +30,21 @@
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(139, 69, 19, 0.1);
-  min-height: 650px; /* Altura mínima igual para ambos */
+  height: 650px; /* Altura fixa igual para ambos */
   display: flex;
   flex-direction: column;
+  box-sizing: border-box; /* Inclui padding na altura total */
 }
 
 .review-form {
   justify-content: flex-start;
+  overflow: hidden; /* Garante que nada ultrapasse */
 }
 
 .reviews-list {
   background: var(--light-text);
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Esconde overflow do container principal */
   display: flex;
   flex-direction: column;
 }
@@ -51,8 +55,20 @@
   font-size: 1.8rem;
   text-align: center;
   flex-shrink: 0; /* Impede que o título seja afetado pelo scroll */
+  padding: 0;
 }
 
+/* ===== CONTEÚDO SCROLLÁVEL DAS AVALIAÇÕES ===== */
+.reviews-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  max-height: calc(650px - 120px); /* Altura total menos o cabeçalho */
+  margin: 0;
+}
+
+/* RESTANTE DO CSS PERMANECE IGUAL... */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -374,12 +390,6 @@
 }
 
 /* ===== SCROLL PERSONALIZADO ===== */
-.reviews-content {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-}
-
 .reviews-content::-webkit-scrollbar {
   width: 6px;
 }
@@ -398,7 +408,7 @@
   background: linear-gradient(180deg, var(--lighter-brown), var(--light-brown));
 }
 
-/* ======= RESPONSIVO CORRIGIDO ======= */
+/* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .review-page {
     padding: 2rem 0;
@@ -408,6 +418,7 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     padding: 0 1rem;
+    min-height: auto;
   }
 
   .review-form,
@@ -415,7 +426,12 @@
     padding: 2rem 1.25rem;
     width: 100%;
     margin: 0 auto;
-    min-height: auto; /* Remove altura fixa no mobile */
+    height: auto; /* Remove altura fixa no mobile */
+    min-height: 500px; /* Altura mínima para mobile */
+  }
+
+  .reviews-content {
+    max-height: none; /* Remove limite de altura no mobile */
   }
 
   .contact-method {
@@ -454,15 +470,6 @@
   
   .review-comment {
     font-size: 0.95rem;
-  }
-
-  .reviews-list {
-    max-height: none;
-    order: 2;
-  }
-  
-  .review-form {
-    order: 1;
   }
 }
 
