@@ -17,14 +17,56 @@
   gap: 3rem;
   max-width: 1200px;
   margin: 0 auto;
+  align-items: start;
 }
 
-.review-form {
+/* ===== FORMULÁRIO E LISTA - MESMO ESTILO ===== */
+.review-form,
+.reviews-list {
   background-color: var(--light-text);
   padding: 2.5rem;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(139, 69, 19, 0.1);
+  height: fit-content;
+}
+
+.reviews-list {
+  background: var(--light-text);
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--light-brown), var(--lighter-brown));
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.reviews-list h2 {
+  color: var(--primary-brown);
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.reviews-list h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--light-brown), var(--lighter-brown));
+  border-radius: 2px;
 }
 
 .form-group {
@@ -87,7 +129,7 @@
   box-sizing: border-box;
   margin: 0;
   position: relative;
-  padding-left: 3rem; /* Espaço para o radio button */
+  padding-left: 3rem;
 }
 
 .radio-label::before {
@@ -191,7 +233,7 @@
   font-weight: 500;
 }
 
-/* ===== CONSENTIMENTO (checkbox em cima, texto embaixo, centralizado) ===== */
+/* ===== CONSENTIMENTO ===== */
 .form-group.consent-group {
   width: 100%;
   margin-top: 1.5rem;
@@ -202,7 +244,7 @@
 
 .checkbox-label {
   display: flex;
-  flex-direction: column;     /* <- isso que põe a caixa em cima */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
@@ -251,81 +293,34 @@
   box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
 }
 
-/* ===== LISTA DE AVALIAÇÕES - NOVO DESIGN ===== */
-.reviews-list {
-  background: linear-gradient(135deg, #fef7f0 0%, #fff 100%);
-  padding: 2.5rem;
-  border-radius: 20px;
-  box-shadow: 
-    0 10px 30px rgba(139, 69, 19, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(139, 69, 19, 0.08);
-  position: relative;
-  overflow: hidden;
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
 }
 
-.reviews-list::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--light-brown), var(--lighter-brown));
-}
-
-.reviews-list h2 {
-  color: var(--primary-brown);
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  text-align: center;
-  position: relative;
-  padding-bottom: 0.8rem;
-}
-
-.reviews-list h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--light-brown), var(--lighter-brown));
-  border-radius: 2px;
+.btn-submit:disabled:hover {
+  transform: none !important;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3) !important;
 }
 
 /* ===== ITEM DE AVALIAÇÃO ===== */
 .review-item {
   background: white;
   padding: 1.8rem;
-  border-radius: 16px;
+  border-radius: 12px;
   margin-bottom: 1.5rem;
   box-shadow: 
-    0 4px 15px rgba(139, 69, 19, 0.08),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 2px 8px rgba(139, 69, 19, 0.08);
   border: 1px solid rgba(139, 69, 19, 0.1);
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
-}
-
-.review-item::before {
-  content: '"';
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 4rem;
-  color: rgba(139, 69, 19, 0.05);
-  font-family: serif;
-  line-height: 1;
 }
 
 .review-item:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 
-    0 8px 25px rgba(139, 69, 19, 0.12),
-    0 2px 5px rgba(0, 0, 0, 0.08);
+    0 4px 15px rgba(139, 69, 19, 0.12);
 }
 
 .review-item:last-child {
@@ -353,7 +348,6 @@
   color: #FFD700;
   font-size: 1.3rem;
   letter-spacing: 2px;
-  text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
   flex-shrink: 0;
 }
 
@@ -364,19 +358,6 @@
   line-height: 1.6;
   margin-bottom: 0.8rem;
   font-style: italic;
-  position: relative;
-  padding-left: 1rem;
-}
-
-.review-comment::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--light-brown), var(--lighter-brown));
-  border-radius: 2px;
 }
 
 /* ===== DATA ===== */
@@ -386,11 +367,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.review-date::before {
-  content: '📅';
-  font-size: 0.8rem;
 }
 
 /* ===== ESTADOS DE CARREGAMENTO ===== */
@@ -412,96 +388,6 @@
   border-radius: 12px;
   border: 2px dashed rgba(139, 69, 19, 0.1);
   font-style: italic;
-}
-
-.no-reviews::before {
-  content: '💬';
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 1rem;
-  opacity: 0.5;
-}
-
-/* ===== ANIMAÇÃO DE ENTRADA ===== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.review-item {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.review-item:nth-child(odd) {
-  animation-delay: 0.1s;
-}
-
-.review-item:nth-child(even) {
-  animation-delay: 0.2s;
-}
-
-/* ===== BADGE PARA AVALIAÇÕES RECENTES ===== */
-.review-item:first-child {
-  border: 2px solid rgba(255, 215, 0, 0.3);
-  background: linear-gradient(135deg, #fffaf0 0%, #fff 100%);
-}
-
-.review-item:first-child::after {
-  content: '⭐ Mais recente';
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: linear-gradient(135deg, #FFD700, #FFA500);
-  color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* ===== RESPONSIVO ===== */
-@media (max-width: 768px) {
-  .reviews-list {
-    padding: 2rem 1.25rem;
-    border-radius: 16px;
-  }
-  
-  .review-item {
-    padding: 1.5rem;
-    margin-bottom: 1.2rem;
-  }
-  
-  .review-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
-  }
-  
-  .rating {
-    align-self: flex-start;
-  }
-  
-  .review-header h3 {
-    font-size: 1rem;
-  }
-  
-  .review-comment {
-    font-size: 0.95rem;
-    padding-left: 0.8rem;
-  }
-  
-  .review-item:first-child::after {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.6rem;
-  }
 }
 
 /* ===== SCROLL PERSONALIZADO ===== */
@@ -526,4 +412,79 @@
 
 .reviews-list::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, var(--lighter-brown), var(--light-brown));
+}
+
+/* ======= RESPONSIVO CORRIGIDO ======= */
+@media (max-width: 768px) {
+  .review-page {
+    padding: 2rem 0;
+  }
+
+  .review-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .review-form,
+  .reviews-list {
+    padding: 2rem 1.25rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .contact-method {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .form-group.consent-group {
+    flex-direction: column;
+  }
+
+  .checkbox-label {
+    max-width: 280px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    max-width: 280px;
+    margin: 0.5rem auto 0 auto;
+    display: block;
+  }
+
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  
+  .rating {
+    align-self: flex-start;
+  }
+  
+  .review-header h3 {
+    font-size: 1rem;
+  }
+  
+  .review-comment {
+    font-size: 0.95rem;
+  }
+
+  .reviews-list {
+    max-height: none;
+    order: 2; /* Garante que fique embaixo no mobile */
+  }
+  
+  .review-form {
+    order: 1; /* Garante que fique em cima no mobile */
+  }
+}
+
+/* Garante que no mobile fique um embaixo do outro */
+@media (max-width: 768px) {
+  .review-content {
+    display: flex;
+    flex-direction: column;
+  }
 }
