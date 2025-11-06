@@ -28,24 +28,21 @@
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(139, 69, 19, 0.1);
-  height: fit-content;
+  min-height: 650px; /* Altura mínima igual para ambos */
+  display: flex;
+  flex-direction: column;
+}
+
+.review-form {
+  justify-content: flex-start;
 }
 
 .reviews-list {
   background: var(--light-text);
   position: relative;
   overflow: hidden;
-}
-
-.reviews-list::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--light-brown), var(--lighter-brown));
-  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .reviews-list h2 {
@@ -53,20 +50,7 @@
   margin-bottom: 2rem;
   font-size: 1.8rem;
   text-align: center;
-  position: relative;
-  padding-bottom: 0.8rem;
-}
-
-.reviews-list h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--light-brown), var(--lighter-brown));
-  border-radius: 2px;
+  flex-shrink: 0; /* Impede que o título seja afetado pelo scroll */
 }
 
 .form-group {
@@ -285,6 +269,7 @@
   transition: all 0.3s ease;
   width: 100%;
   box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+  margin-top: auto; /* Empurra o botão para baixo */
 }
 
 .btn-submit:hover {
@@ -310,8 +295,7 @@
   padding: 1.8rem;
   border-radius: 12px;
   margin-bottom: 1.5rem;
-  box-shadow: 
-    0 2px 8px rgba(139, 69, 19, 0.08);
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.08);
   border: 1px solid rgba(139, 69, 19, 0.1);
   transition: all 0.3s ease;
   position: relative;
@@ -319,8 +303,7 @@
 
 .review-item:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 4px 15px rgba(139, 69, 19, 0.12);
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.12);
 }
 
 .review-item:last-child {
@@ -391,26 +374,27 @@
 }
 
 /* ===== SCROLL PERSONALIZADO ===== */
-.reviews-list {
-  max-height: 600px;
+.reviews-content {
+  flex: 1;
   overflow-y: auto;
+  padding-right: 0.5rem;
 }
 
-.reviews-list::-webkit-scrollbar {
+.reviews-content::-webkit-scrollbar {
   width: 6px;
 }
 
-.reviews-list::-webkit-scrollbar-track {
+.reviews-content::-webkit-scrollbar-track {
   background: rgba(139, 69, 19, 0.05);
   border-radius: 3px;
 }
 
-.reviews-list::-webkit-scrollbar-thumb {
+.reviews-content::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--light-brown), var(--lighter-brown));
   border-radius: 3px;
 }
 
-.reviews-list::-webkit-scrollbar-thumb:hover {
+.reviews-content::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, var(--lighter-brown), var(--light-brown));
 }
 
@@ -431,6 +415,7 @@
     padding: 2rem 1.25rem;
     width: 100%;
     margin: 0 auto;
+    min-height: auto; /* Remove altura fixa no mobile */
   }
 
   .contact-method {
@@ -473,11 +458,11 @@
 
   .reviews-list {
     max-height: none;
-    order: 2; /* Garante que fique embaixo no mobile */
+    order: 2;
   }
   
   .review-form {
-    order: 1; /* Garante que fique em cima no mobile */
+    order: 1;
   }
 }
 
