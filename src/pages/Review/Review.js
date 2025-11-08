@@ -15,7 +15,6 @@ const Review = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Função para carregar reviews do banco
   const loadReviews = async () => {
     try {
       const response = await fetch('/.netlify/functions/get-reviews');
@@ -31,12 +30,10 @@ const Review = () => {
     }
   };
 
-  // Carregar reviews quando o componente montar
   useEffect(() => {
     loadReviews();
   }, []);
 
-  // Função para formatar o telefone no padrão (00) 00000-0000
   const formatPhoneNumber = (value) => {
     const numbers = value.replace(/\D/g, '');
     const limitedNumbers = numbers.slice(0, 11);
@@ -101,7 +98,6 @@ const Review = () => {
 
       alert('Obrigado pela sua avaliação!');
 
-      // Limpa o form
       setFormData({
         name: '',
         email: '',
@@ -113,7 +109,6 @@ const Review = () => {
       setHoverRating(0);
       setContactMethod('email');
 
-      // Recarrega as avaliações para mostrar a nova
       await loadReviews();
 
     } catch (error) {
@@ -122,7 +117,6 @@ const Review = () => {
     }
   };
 
-  // Componente de Estrelas Interativas
   const StarRating = () => {
     return (
       <div className="star-rating">
@@ -146,7 +140,6 @@ const Review = () => {
     );
   };
 
-  // Função para mostrar estrelas na lista de reviews
   const renderStars = (rating) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
   };
@@ -159,118 +152,123 @@ const Review = () => {
         <div className="review-content">
           <div className="review-form">
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="name">Nome e Sobrenome *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label>Como prefere ser contatado? *</label>
-                <div className="contact-method">
-                  <div className="radio-option">
-                    <input
-                      type="radio"
-                      id="email-contact"
-                      name="contactMethod"
-                      value="email"
-                      checked={contactMethod === 'email'}
-                      onChange={(e) => setContactMethod(e.target.value)}
-                      required
-                    />
-                    <label htmlFor="email-contact" className="radio-label">
-                      <span className="icon-text">
-                        <img src="/images/icons/email.png" alt="Email" className="contact-icon" />
-                        Email
-                      </span>
-                    </label>
+              {/* CONTEÚDO SCROLLÁVEL DO FORMULÁRIO */}
+              <div className="form-content">
+                <div className="form-group">
+                  <label htmlFor="name">Nome e Sobrenome *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label>Como prefere ser contatado? *</label>
+                  <div className="contact-method">
+                    <div className="radio-option">
+                      <input
+                        type="radio"
+                        id="email-contact"
+                        name="contactMethod"
+                        value="email"
+                        checked={contactMethod === 'email'}
+                        onChange={(e) => setContactMethod(e.target.value)}
+                        required
+                      />
+                      <label htmlFor="email-contact" className="radio-label">
+                        <span className="icon-text">
+                          <img src="/images/icons/email.png" alt="Email" className="contact-icon" />
+                          Email
+                        </span>
+                      </label>
+                    </div>
+                    <div className="radio-option">
+                      <input
+                        type="radio"
+                        id="phone-contact"
+                        name="contactMethod"
+                        value="phone"
+                        checked={contactMethod === 'phone'}
+                        onChange={(e) => setContactMethod(e.target.value)}
+                        required
+                      />
+                      <label htmlFor="phone-contact" className="radio-label">
+                        <span className="icon-text">
+                          <img src="/images/icons/telefone.png" alt="Telefone" className="contact-icon" />
+                          Telefone
+                        </span>
+                      </label>
+                    </div>
                   </div>
-                  <div className="radio-option">
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor={contactMethod}>
+                    {contactMethod === 'email' ? 'Email *' : 'Telefone *'}
+                  </label>
+                  <input
+                    type={contactMethod === 'email' ? 'email' : 'tel'}
+                    id={contactMethod}
+                    name={contactMethod}
+                    value={formData[contactMethod]}
+                    onChange={handleChange}
+                    required
+                    placeholder={
+                      contactMethod === 'email' 
+                        ? 'seu@email.com' 
+                        : '(00) 00000-0000'
+                    }
+                    maxLength={contactMethod === 'phone' ? '15' : undefined}
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label>Avaliação *</label>
+                  <StarRating />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="comment">Comentário</label>
+                  <textarea
+                    id="comment"
+                    name="comment"
+                    value={formData.comment}
+                    onChange={handleChange}
+                    rows="5"
+                    placeholder="Conte-nos sobre sua experiência..."
+                  ></textarea>
+                </div>
+
+                <div className="form-group consent-group">
+                  <label className="checkbox-label">
                     <input
-                      type="radio"
-                      id="phone-contact"
-                      name="contactMethod"
-                      value="phone"
-                      checked={contactMethod === 'phone'}
-                      onChange={(e) => setContactMethod(e.target.value)}
-                      required
+                      type="checkbox"
+                      name="consent"
+                      checked={formData.consent}
+                      onChange={handleChange}
                     />
-                    <label htmlFor="phone-contact" className="radio-label">
-                      <span className="icon-text">
-                        <img src="/images/icons/telefone.png" alt="Telefone" className="contact-icon" />
-                        Telefone
-                      </span>
-                    </label>
-                  </div>
+                    <span>Concordo em compartilhar minha avaliação publicamente</span>
+                  </label>
                 </div>
               </div>
               
-              <div className="form-group">
-                <label htmlFor={contactMethod}>
-                  {contactMethod === 'email' ? 'Email *' : 'Telefone *'}
-                </label>
-                <input
-                  type={contactMethod === 'email' ? 'email' : 'tel'}
-                  id={contactMethod}
-                  name={contactMethod}
-                  value={formData[contactMethod]}
-                  onChange={handleChange}
-                  required
-                  placeholder={
-                    contactMethod === 'email' 
-                      ? 'seu@email.com' 
-                      : '(00) 00000-0000'
-                  }
-                  maxLength={contactMethod === 'phone' ? '15' : undefined}
-                />
+              {/* BOTÃO FIXO NA PARTE INFERIOR */}
+              <div className="form-footer">
+                <button 
+                  type="submit" 
+                  className="btn-submit"
+                  disabled={formData.rating === 0}
+                >
+                  Enviar Avaliação
+                </button>
               </div>
-              
-              <div className="form-group">
-                <label>Avaliação *</label>
-                <StarRating />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="comment">Comentário</label>
-                <textarea
-                  id="comment"
-                  name="comment"
-                  value={formData.comment}
-                  onChange={handleChange}
-                  rows="5"
-                  placeholder="Conte-nos sobre sua experiência..."
-                ></textarea>
-              </div>
-
-              <div className="form-group consent-group">
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="consent"
-                    checked={formData.consent}
-                    onChange={handleChange}
-                  />
-                  <span>Concordo em compartilhar minha avaliação publicamente</span>
-                </label>
-              </div>
-              
-              <button 
-                type="submit" 
-                className="btn-submit"
-                disabled={formData.rating === 0}
-              >
-                Enviar Avaliação
-              </button>
             </form>
           </div>
 
-          {/* SEÇÃO DE AVALIAÇÕES REAIS - COM DIV DE CONTEÚDO PARA SCROLL */}
           <div className="reviews-list">
             <h2>Avaliações Recentes</h2>
             

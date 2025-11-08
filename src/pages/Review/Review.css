@@ -18,8 +18,8 @@
   gap: 3rem;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: stretch; /* Alterado para stretch */
-  min-height: 650px; /* Altura mínima do container */
+  align-items: stretch;
+  min-height: 650px;
 }
 
 /* ===== FORMULÁRIO E LISTA - MESMA ALTURA ===== */
@@ -30,23 +30,41 @@
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(139, 69, 19, 0.1);
-  height: 650px; /* Altura fixa igual para ambos */
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box; /* Inclui padding na altura total */
+  box-sizing: border-box;
+  position: relative;
 }
 
 .review-form {
-  justify-content: flex-start;
-  overflow: hidden; /* Garante que nada ultrapasse */
+  justify-content: space-between;
+  overflow: hidden;
 }
 
 .reviews-list {
   background: var(--light-text);
   position: relative;
-  overflow: hidden; /* Esconde overflow do container principal */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* ===== CONTEÚDO SCROLLÁVEL DO FORMULÁRIO ===== */
+.form-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== BOTÃO FIXO NA PARTE INFERIOR ===== */
+.form-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(139, 69, 19, 0.1);
 }
 
 .reviews-list h2 {
@@ -54,7 +72,7 @@
   margin-bottom: 2rem;
   font-size: 1.8rem;
   text-align: center;
-  flex-shrink: 0; /* Impede que o título seja afetado pelo scroll */
+  flex-shrink: 0;
   padding: 0;
 }
 
@@ -64,24 +82,24 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 0.5rem;
-  max-height: calc(650px - 120px); /* Altura total menos o cabeçalho */
+  max-height: calc(650px - 120px);
   margin: 0;
 }
 
 /* RESTANTE DO CSS PERMANECE IGUAL... */
-.form-group {
+.review-form .form-group {
   margin-bottom: 1.5rem;
 }
 
-.form-group label {
+.review-form .form-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
   color: var(--primary-brown);
 }
 
-.form-group input,
-.form-group textarea {
+.review-form .form-group input,
+.review-form .form-group textarea {
   width: 100%;
   padding: 0.8rem;
   border: 1px solid #ddd;
@@ -92,8 +110,8 @@
   background-color: #fafafa;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.review-form .form-group input:focus,
+.review-form .form-group textarea:focus {
   outline: none;
   border-color: var(--primary-brown);
   background-color: white;
@@ -233,29 +251,30 @@
   font-weight: 500;
 }
 
-/* ===== CONSENTIMENTO ===== */
-.form-group.consent-group {
+/* ===== CONSENTIMENTO REVIEW ===== */
+.review-form .form-group.consent-group {
   width: 100%;
   margin-top: 1.5rem;
   display: flex;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
 }
 
-.checkbox-label {
-  display: flex;
-  flex-direction: column;
+.review-form .checkbox-label {
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  margin: 0 auto;
-  text-align: center;
+  justify-content: flex-start;
+  gap: 0.8rem;
+  margin: 0;
+  text-align: left;
   font-size: 0.95rem;
   line-height: 1.4;
+  width: 100%;
+  cursor: pointer;
 }
 
-.checkbox-label input[type="checkbox"] {
-  display: block;
+.review-form .checkbox-label input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
   width: 18px;
@@ -263,44 +282,58 @@
   border: 2px solid #8b4513;
   border-radius: 6px;
   background: #fff;
-  margin: 0 auto;
+  margin: 0.5rem;
   flex-shrink: 0;
+  cursor: pointer;
+  grid-column: 1;
 }
 
-.checkbox-label input[type="checkbox"]:checked {
+.review-form .checkbox-label span {
+  grid-column: 2;
+  text-align: left;
+}
+
+.review-form .checkbox-label input[type="checkbox"]:checked {
   background: #8b4513;
   box-shadow: inset 0 0 0 3px #fff;
 }
 
-/* ===== Botão ===== */
-.btn-submit {
+.review-form .checkbox-label:hover input[type="checkbox"] {
+  border-color: var(--light-brown);
+}
+
+.review-form .checkbox-label:hover {
+  color: var(--primary-brown);
+}
+
+/* ===== Botão Review ===== */
+.review-form .btn-submit {
   background: linear-gradient(135deg, var(--light-brown), var(--lighter-brown));
   color: var(--light-text);
   border: none;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.5rem; /* Botão menor */
   border-radius: 50px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem; /* Fonte menor */
   transition: all 0.3s ease;
   width: 100%;
   box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
-  margin-top: auto; /* Empurra o botão para baixo */
 }
 
-.btn-submit:hover {
+.review-form .btn-submit:hover {
   background: linear-gradient(135deg, var(--lighter-brown), var(--light-brown));
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
 }
 
-.btn-submit:disabled {
+.review-form .btn-submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none !important;
 }
 
-.btn-submit:disabled:hover {
+.review-form .btn-submit:disabled:hover {
   transform: none !important;
   box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3) !important;
 }
@@ -390,20 +423,24 @@
 }
 
 /* ===== SCROLL PERSONALIZADO ===== */
+.form-content::-webkit-scrollbar,
 .reviews-content::-webkit-scrollbar {
   width: 6px;
 }
 
+.form-content::-webkit-scrollbar-track,
 .reviews-content::-webkit-scrollbar-track {
   background: rgba(139, 69, 19, 0.05);
   border-radius: 3px;
 }
 
+.form-content::-webkit-scrollbar-thumb,
 .reviews-content::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--light-brown), var(--lighter-brown));
   border-radius: 3px;
 }
 
+.form-content::-webkit-scrollbar-thumb:hover,
 .reviews-content::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, var(--lighter-brown), var(--light-brown));
 }
@@ -426,12 +463,19 @@
     padding: 2rem 1.25rem;
     width: 100%;
     margin: 0 auto;
-    height: auto; /* Remove altura fixa no mobile */
-    min-height: 500px; /* Altura mínima para mobile */
+    height: auto;
+    min-height: 500px;
   }
 
+  .form-content,
   .reviews-content {
-    max-height: none; /* Remove limite de altura no mobile */
+    max-height: none;
+    margin-bottom: 1rem;
+  }
+
+  .form-footer {
+    padding-top: 0.5rem;
+    border-top: none;
   }
 
   .contact-method {
@@ -439,19 +483,21 @@
     gap: 0.8rem;
   }
 
-  .form-group.consent-group {
+  .review-form .form-group.consent-group {
     flex-direction: column;
   }
 
-  .checkbox-label {
+  .review-form .checkbox-label {
     max-width: 280px;
   }
 
-  .btn-submit {
+  .review-form .btn-submit {
     width: 100%;
     max-width: 280px;
     margin: 0.5rem auto 0 auto;
     display: block;
+    padding: 0.7rem 1.2rem; /* Botão ainda menor no mobile */
+    font-size: 0.95rem;
   }
 
   .review-header {
