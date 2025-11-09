@@ -526,3 +526,34 @@
     flex-direction: column;
   }
 }
+/* 1) Consentimento menor e tudo na mesma linha */
+.review-form .form-group.consent-group {
+  margin-top: 1rem;            /* um pouco menos de espaço */
+  margin-bottom: 0.5rem;       /* aproxima do botão */
+}
+
+.review-form .checkbox-label {
+  display: flex;               /* sai do grid e vira linha */
+  align-items: center;
+  gap: 0.5rem;
+  width: auto;
+  font-size: 0.9rem;
+}
+
+.review-form .checkbox-label input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 0;                   /* encosta mais no texto */
+  border-radius: 4px;
+}
+
+/* 2) Sobe um pouco o botão de "Enviar Avaliação" */
+.form-footer {
+  padding-top: 0.5rem;         /* era 1rem */
+}
+
+/* 3) Aumentar área das avaliações recentes para não “parar” no meio */
+.reviews-content {
+  max-height: none;            /* tira o limite antigo */
+  /* se quiser ainda limitar, usa por exemplo: max-height: 900px; */
+}
