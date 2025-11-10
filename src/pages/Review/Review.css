@@ -37,17 +37,20 @@
   position: relative;
 }
 
-.review-form {
-  justify-content: space-between;
-  overflow: hidden;
-}
-
+/* quadro da direita fixo */
 .reviews-list {
   background: var(--light-text);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-height: 650px;
+}
+
+/* 👇 aqui estava o problema do botão cortado */
+.review-form {
+  justify-content: space-between;
+  overflow: visible; /* era hidden */
 }
 
 /* ===== CONTEÚDO SCROLLÁVEL DO FORMULÁRIO ===== */
@@ -63,7 +66,7 @@
 .form-footer {
   flex-shrink: 0;
   margin-top: auto;
-  padding-top: 1rem;
+  padding-top: 0.4rem;
   border-top: 1px solid rgba(139, 69, 19, 0.1);
 }
 
@@ -82,7 +85,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 0.5rem;
-  max-height: calc(650px - 120px);
+  height: calc(100% - 120px);
+  max-height: calc(100% - 120px);
   margin: 0;
 }
 
@@ -254,43 +258,41 @@
 /* ===== CONSENTIMENTO REVIEW ===== */
 .review-form .form-group.consent-group {
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
   display: flex;
   justify-content: flex-start;
   text-align: left;
 }
 
 .review-form .checkbox-label {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.8rem;
+  display: flex;
+  align-items: center;      /* centraliza verticalmente com o botão */
+  gap: 0.5rem;
   margin: 0;
   text-align: left;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  width: 100%;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  width: auto;
   cursor: pointer;
 }
 
 .review-form .checkbox-label input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 14px;
+  height: 14px;
   border: 2px solid #8b4513;
-  border-radius: 6px;
+  border-radius: 4px;
   background: #fff;
-  margin: 0.5rem;
+  margin: 0;
   flex-shrink: 0;
   cursor: pointer;
-  grid-column: 1;
 }
 
 .review-form .checkbox-label span {
-  grid-column: 2;
-  text-align: left;
+  margin-left: 0;           /* tiramos o 1rem que empurrava pra baixo */
+  display: inline-block;
 }
 
 .review-form .checkbox-label input[type="checkbox"]:checked {
@@ -311,11 +313,11 @@
   background: linear-gradient(135deg, var(--light-brown), var(--lighter-brown));
   color: var(--light-text);
   border: none;
-  padding: 0.8rem 1.5rem; /* Botão menor */
+  padding: 0.8rem 1.5rem;   /* tamanho normal de botão */
   border-radius: 50px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1rem; /* Fonte menor */
+  font-size: 1rem;          /* voltou a mostrar o texto */
   transition: all 0.3s ease;
   width: 100%;
   box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
@@ -496,7 +498,7 @@
     max-width: 280px;
     margin: 0.5rem auto 0 auto;
     display: block;
-    padding: 0.7rem 1.2rem; /* Botão ainda menor no mobile */
+    padding: 0.7rem 1.2rem;
     font-size: 0.95rem;
   }
 
@@ -525,35 +527,4 @@
     display: flex;
     flex-direction: column;
   }
-}
-/* 1) Consentimento menor e tudo na mesma linha */
-.review-form .form-group.consent-group {
-  margin-top: 1rem;            /* um pouco menos de espaço */
-  margin-bottom: 0.5rem;       /* aproxima do botão */
-}
-
-.review-form .checkbox-label {
-  display: flex;               /* sai do grid e vira linha */
-  align-items: center;
-  gap: 0.5rem;
-  width: auto;
-  font-size: 0.9rem;
-}
-
-.review-form .checkbox-label input[type="checkbox"] {
-  width: 14px;
-  height: 14px;
-  margin: 0;                   /* encosta mais no texto */
-  border-radius: 4px;
-}
-
-/* 2) Sobe um pouco o botão de "Enviar Avaliação" */
-.form-footer {
-  padding-top: 0.5rem;         /* era 1rem */
-}
-
-/* 3) Aumentar área das avaliações recentes para não “parar” no meio */
-.reviews-content {
-  max-height: none;            /* tira o limite antigo */
-  /* se quiser ainda limitar, usa por exemplo: max-height: 900px; */
 }
