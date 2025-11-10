@@ -11,7 +11,7 @@
   font-weight: bold;
 }
 
-/* ===== LAYOUT PRINCIPAL CORRIGIDO ===== */
+/* ===== LAYOUT PRINCIPAL ===== */
 .review-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -19,7 +19,7 @@
   max-width: 1200px;
   margin: 0 auto;
   align-items: stretch;
-  min-height: 650px;
+  /* não precisa de min-height aqui porque vamos fixar nos cards */
 }
 
 /* ===== FORMULÁRIO E LISTA - MESMA ALTURA ===== */
@@ -30,27 +30,21 @@
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(139, 69, 19, 0.1);
-  min-height: auto;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   position: relative;
+  height: 540px;             /* altura fixa pros dois quadros */
 }
 
-/* quadro da direita fixo */
-.reviews-list {
-  background: var(--light-text);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 650px;
-}
-
-/* 👇 aqui estava o problema do botão cortado */
 .review-form {
   justify-content: space-between;
-  overflow: visible; /* era hidden */
+  overflow: visible;         /* garante que o botão apareça inteiro */
+}
+
+.reviews-list {
+  overflow: hidden;          /* quadro não cresce, só o conteúdo rola */
+  background: var(--light-text);
 }
 
 /* ===== CONTEÚDO SCROLLÁVEL DO FORMULÁRIO ===== */
@@ -72,7 +66,7 @@
 
 .reviews-list h2 {
   color: var(--primary-brown);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 1.8rem;
   text-align: center;
   flex-shrink: 0;
@@ -80,17 +74,17 @@
 }
 
 /* ===== CONTEÚDO SCROLLÁVEL DAS AVALIAÇÕES ===== */
+/* 540px total - paddings e título ≈ 360px de área rolável */
 .reviews-content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 0.5rem;
-  height: calc(100% - 120px);
-  max-height: calc(100% - 120px);
+  max-height: 360px;         /* se passar disso, aparece o scroll */
   margin: 0;
 }
 
-/* RESTANTE DO CSS PERMANECE IGUAL... */
+/* ===== CAMPOS ===== */
 .review-form .form-group {
   margin-bottom: 1.5rem;
 }
@@ -259,7 +253,7 @@
 .review-form .form-group.consent-group {
   width: 100%;
   margin-top: 1rem;
-  margin-bottom: 0;
+  margin-bottom: 0.4rem;
   display: flex;
   justify-content: flex-start;
   text-align: left;
@@ -267,21 +261,20 @@
 
 .review-form .checkbox-label {
   display: flex;
-  align-items: center;      /* centraliza verticalmente com o botão */
-  gap: 0.5rem;
+  align-items: center;     /* deixa texto na mesma altura do botão */
+  gap: 0.6rem;             /* afasta do botão */
   margin: 0;
   text-align: left;
   font-size: 0.9rem;
-  line-height: 1.3;
-  width: auto;
+  line-height: 1.2;
   cursor: pointer;
 }
 
 .review-form .checkbox-label input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 13px;             /* menorzinho */
+  height: 13px;
   border: 2px solid #8b4513;
   border-radius: 4px;
   background: #fff;
@@ -291,7 +284,6 @@
 }
 
 .review-form .checkbox-label span {
-  margin-left: 0;           /* tiramos o 1rem que empurrava pra baixo */
   display: inline-block;
 }
 
@@ -313,11 +305,11 @@
   background: linear-gradient(135deg, var(--light-brown), var(--lighter-brown));
   color: var(--light-text);
   border: none;
-  padding: 0.8rem 1.5rem;   /* tamanho normal de botão */
+  padding: 0.8rem 1.5rem;
   border-radius: 50px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1rem;          /* voltou a mostrar o texto */
+  font-size: 1rem;
   transition: all 0.3s ease;
   width: 100%;
   box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
@@ -457,7 +449,6 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     padding: 0 1rem;
-    min-height: auto;
   }
 
   .review-form,
@@ -465,7 +456,7 @@
     padding: 2rem 1.25rem;
     width: 100%;
     margin: 0 auto;
-    height: auto;
+    height: auto;            /* no mobile pode crescer */
     min-height: 500px;
   }
 
@@ -487,6 +478,7 @@
 
   .review-form .form-group.consent-group {
     flex-direction: column;
+    align-items: flex-start;
   }
 
   .review-form .checkbox-label {
@@ -510,21 +502,5 @@
   
   .rating {
     align-self: flex-start;
-  }
-  
-  .review-header h3 {
-    font-size: 1rem;
-  }
-  
-  .review-comment {
-    font-size: 0.95rem;
-  }
-}
-
-/* Garante que no mobile fique um embaixo do outro */
-@media (max-width: 768px) {
-  .review-content {
-    display: flex;
-    flex-direction: column;
   }
 }

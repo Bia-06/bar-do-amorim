@@ -19,7 +19,6 @@ const Review = () => {
     try {
       const response = await fetch('/.netlify/functions/get-reviews');
       const result = await response.json();
-      
       if (response.ok) {
         setReviews(result.reviews || []);
       }
@@ -37,7 +36,6 @@ const Review = () => {
   const formatPhoneNumber = (value) => {
     const numbers = value.replace(/\D/g, '');
     const limitedNumbers = numbers.slice(0, 11);
-    
     if (limitedNumbers.length <= 2) {
       return limitedNumbers;
     } else if (limitedNumbers.length <= 6) {
@@ -51,13 +49,12 @@ const Review = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    
     let newValue = value;
-    
+
     if (name === 'phone') {
       newValue = formatPhoneNumber(value);
     }
-    
+
     setFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : newValue
@@ -117,28 +114,26 @@ const Review = () => {
     }
   };
 
-  const StarRating = () => {
-    return (
-      <div className="star-rating">
-        {[1, 2, 3, 4, 5].map(star => (
-          <button
-            key={star}
-            type="button"
-            className={`star ${star <= (hoverRating || formData.rating) ? 'filled' : ''}`}
-            onClick={() => handleRatingClick(star)}
-            onMouseEnter={() => setHoverRating(star)}
-            onMouseLeave={() => setHoverRating(0)}
-            aria-label={`Avaliar com ${star} estrela${star > 1 ? 's' : ''}`}
-          >
-            ★
-          </button>
-        ))}
-        <span className="rating-text">
-          {formData.rating > 0 ? `${formData.rating} estrela${formData.rating > 1 ? 's' : ''}` : 'Clique para avaliar'}
-        </span>
-      </div>
-    );
-  };
+  const StarRating = () => (
+    <div className="star-rating">
+      {[1, 2, 3, 4, 5].map(star => (
+        <button
+          key={star}
+          type="button"
+          className={`star ${star <= (hoverRating || formData.rating) ? 'filled' : ''}`}
+          onClick={() => handleRatingClick(star)}
+          onMouseEnter={() => setHoverRating(star)}
+          onMouseLeave={() => setHoverRating(0)}
+          aria-label={`Avaliar com ${star} estrela${star > 1 ? 's' : ''}`}
+        >
+          ★
+        </button>
+      ))}
+      <span className="rating-text">
+        {formData.rating > 0 ? `${formData.rating} estrela${formData.rating > 1 ? 's' : ''}` : 'Clique para avaliar'}
+      </span>
+    </div>
+  );
 
   const renderStars = (rating) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
@@ -148,11 +143,10 @@ const Review = () => {
     <div className="review-page">
       <div className="container">
         <h1>Avalie sua Experiência</h1>
-        
+
         <div className="review-content">
           <div className="review-form">
             <form onSubmit={handleSubmit}>
-              {/* CONTEÚDO SCROLLÁVEL DO FORMULÁRIO */}
               <div className="form-content">
                 <div className="form-group">
                   <label htmlFor="name">Nome e Sobrenome *</label>
@@ -165,7 +159,7 @@ const Review = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="form-group">
                   <label>Como prefere ser contatado? *</label>
                   <div className="contact-method">
@@ -205,7 +199,7 @@ const Review = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="form-group">
                   <label htmlFor={contactMethod}>
                     {contactMethod === 'email' ? 'Email *' : 'Telefone *'}
@@ -217,20 +211,16 @@ const Review = () => {
                     value={formData[contactMethod]}
                     onChange={handleChange}
                     required
-                    placeholder={
-                      contactMethod === 'email' 
-                        ? 'seu@email.com' 
-                        : '(00) 00000-0000'
-                    }
+                    placeholder={contactMethod === 'email' ? 'seu@email.com' : '(00) 00000-0000'}
                     maxLength={contactMethod === 'phone' ? '15' : undefined}
                   />
                 </div>
-                
+
                 <div className="form-group">
                   <label>Avaliação *</label>
                   <StarRating />
                 </div>
-                
+
                 <div className="form-group">
                   <label htmlFor="comment">Comentário</label>
                   <textarea
@@ -255,11 +245,10 @@ const Review = () => {
                   </label>
                 </div>
               </div>
-              
-              {/* BOTÃO FIXO NA PARTE INFERIOR */}
+
               <div className="form-footer">
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="btn-submit"
                   disabled={formData.rating === 0}
                 >
@@ -271,7 +260,7 @@ const Review = () => {
 
           <div className="reviews-list">
             <h2>Avaliações Recentes</h2>
-            
+
             <div className="reviews-content">
               {loading ? (
                 <p className="loading-text">Carregando avaliações...</p>
@@ -297,6 +286,7 @@ const Review = () => {
               )}
             </div>
           </div>
+
         </div>
       </div>
     </div>
