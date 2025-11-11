@@ -279,7 +279,16 @@ const Review = () => {
                       <p className="review-comment">"{review.comentario}"</p>
                     )}
                     <small className="review-date">
-                      {new Date(review.data_avaliacao).toLocaleDateString('pt-BR')}
+                      <span>
+                        {new Date(review.data_avaliacao).toLocaleDateString('pt-BR')}
+                      </span>
+                      <span>•</span>
+                      <span>
+                        {new Date(review.data_avaliacao).toLocaleTimeString('pt-BR', {
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })}
+                      </span>
                     </small>
                   </div>
                 ))

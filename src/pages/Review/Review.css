@@ -434,8 +434,6 @@
   background: linear-gradient(180deg, var(--lighter-brown), var(--light-brown));
 }
 
-/* ...todo o seu CSS de cima permanece igual até a parte do @media... */
-
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .review-page {
@@ -501,4 +499,12 @@
   .reviews-content::-webkit-scrollbar-thumb:hover {
     background: #a3632b;
   }
+}
+/* ===== DATA E HORÁRIO ===== */
+.review-date {
+  color: #888;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
