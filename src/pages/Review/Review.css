@@ -434,6 +434,8 @@
   background: linear-gradient(180deg, var(--lighter-brown), var(--light-brown));
 }
 
+/* ...todo o seu CSS de cima permanece igual até a parte do @media... */
+
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
   .review-page {
@@ -446,7 +448,7 @@
     padding: 0 1rem;
   }
 
-  /* mantém o mesmo limite do desktop */
+  /* mantém o mesmo limite do desktop, só que um pouco mais alto no mobile */
   .review-form,
   .reviews-list {
     padding: 1.75rem 1.25rem;
@@ -455,19 +457,20 @@
     height: 860px;
   }
 
-  /* 👇 aqui é o conserto: deixa o formulário rolar por dentro */
+  /* formulário rola por dentro */
   .review-form {
-    overflow: hidden;           /* esconde o que passar do card */
+    overflow: hidden;
   }
 
   .form-content {
     flex: 1;
-    overflow-y: auto;           /* rola dentro do card */
+    overflow-y: auto;
     margin-bottom: 1rem;
   }
 
+  /* 👇 aqui aumentei o limite pra mostrar mais cards antes do scroll */
   .reviews-content {
-    max-height: 580px;          /* um pouco menos pra caber no mobile */
+    max-height: 720px;                /* era 580px */
   }
 
   .contact-method {
@@ -478,5 +481,24 @@
   .review-form .btn-submit {
     width: 100%;
     margin-top: 0.5rem;
+  }
+
+  /* 👇 força o scroll marrom no mobile também */
+  .reviews-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .reviews-content::-webkit-scrollbar-track {
+    background: rgba(139, 69, 19, 0.08);
+    border-radius: 3px;
+  }
+
+  .reviews-content::-webkit-scrollbar-thumb {
+    background: #8b4513;              /* marrom */
+    border-radius: 3px;
+  }
+
+  .reviews-content::-webkit-scrollbar-thumb:hover {
+    background: #a3632b;
   }
 }
