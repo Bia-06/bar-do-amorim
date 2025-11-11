@@ -19,7 +19,6 @@
   max-width: 1200px;
   margin: 0 auto;
   align-items: stretch;
-  /* não precisa de min-height aqui porque vamos fixar nos cards */
 }
 
 /* ===== FORMULÁRIO E LISTA - MESMA ALTURA ===== */
@@ -34,16 +33,16 @@
   flex-direction: column;
   box-sizing: border-box;
   position: relative;
-  height: 780px;             /* altura fixa pros dois quadros */
+  height: 780px;            /* ALTURA FIXA pros dois */
 }
 
 .review-form {
   justify-content: space-between;
-  overflow: visible;         /* garante que o botão apareça inteiro */
+  overflow: visible;        /* garante botão inteiro */
 }
 
 .reviews-list {
-  overflow: hidden;          /* quadro não cresce, só o conteúdo rola */
+  overflow: hidden;         /* quadro não cresce, só conteúdo */
   background: var(--light-text);
 }
 
@@ -64,6 +63,7 @@
   border-top: 1px solid rgba(139, 69, 19, 0.1);
 }
 
+/* ===== TÍTULO DA LISTA ===== */
 .reviews-list h2 {
   color: var(--primary-brown);
   margin-bottom: 1.5rem;
@@ -74,13 +74,12 @@
 }
 
 /* ===== CONTEÚDO SCROLLÁVEL DAS AVALIAÇÕES ===== */
-/* 540px total - paddings e título ≈ 360px de área rolável */
 .reviews-content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 0.5rem;
-  max-height: 660px;         /* se passar disso, aparece o scroll */
+  max-height: 660px;        /* 780 - paddings - título ≈ 660 */
   margin: 0;
 }
 
@@ -259,8 +258,8 @@
 
 .review-form .checkbox-label {
   display: flex;
-  align-items: center;     /* deixa texto na mesma altura do botão */
-  gap: 0.6rem;             /* afasta do botão */
+  align-items: center;
+  gap: 0.6rem;
   margin: 0;
   text-align: left;
   font-size: 0.9rem;
@@ -269,15 +268,14 @@
 }
 
 .review-form .checkbox-label input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #8b4513;
-    border-radius: 6px;
-    background: #fff;
-    margin: 0;
-    flex-shrink: 0;
-    cursor: pointer;
-    grid-column: 1;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #8b4513;
+  border-radius: 6px;
+  background: #fff;
+  margin: 0;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 
 .review-form .checkbox-label span {
@@ -448,24 +446,18 @@
     padding: 0 1rem;
   }
 
+  /* 👇 mantém o mesmo comportamento do desktop: altura fixa + scroll interno */
   .review-form,
   .reviews-list {
-    padding: 2rem 1.25rem;
+    padding: 1.75rem 1.25rem;
     width: 100%;
     margin: 0 auto;
-    height: auto;            /* no mobile pode crescer */
-    min-height: 500px;
+    height: 780px;       /* mesma altura do desktop */
   }
 
   .form-content,
   .reviews-content {
-    max-height: none;
-    margin-bottom: 1rem;
-  }
-
-  .form-footer {
-    padding-top: 0.5rem;
-    border-top: none;
+    max-height: none;    /* já têm height via flex, então só rolam */
   }
 
   .contact-method {
@@ -473,31 +465,8 @@
     gap: 0.8rem;
   }
 
-  .review-form .form-group.consent-group {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .review-form .checkbox-label {
-    max-width: 280px;
-  }
-
   .review-form .btn-submit {
     width: 100%;
-    max-width: 280px;
-    margin: 0.5rem auto 0 auto;
-    display: block;
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
-  }
-
-  .review-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
-  }
-  
-  .rating {
-    align-self: flex-start;
+    margin-top: 0.5rem;
   }
 }
