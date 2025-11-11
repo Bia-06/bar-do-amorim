@@ -34,7 +34,7 @@
   flex-direction: column;
   box-sizing: border-box;
   position: relative;
-  height: 540px;             /* altura fixa pros dois quadros */
+  height: 780px;             /* altura fixa pros dois quadros */
 }
 
 .review-form {
@@ -80,7 +80,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 0.5rem;
-  max-height: 360px;         /* se passar disso, aparece o scroll */
+  max-height: 660px;         /* se passar disso, aparece o scroll */
   margin: 0;
 }
 
@@ -90,8 +90,6 @@
 }
 
 .review-form .form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
   font-weight: bold;
   color: var(--primary-brown);
 }
@@ -271,16 +269,15 @@
 }
 
 .review-form .checkbox-label input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 13px;             /* menorzinho */
-  height: 13px;
-  border: 2px solid #8b4513;
-  border-radius: 4px;
-  background: #fff;
-  margin: 0;
-  flex-shrink: 0;
-  cursor: pointer;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #8b4513;
+    border-radius: 6px;
+    background: #fff;
+    margin: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+    grid-column: 1;
 }
 
 .review-form .checkbox-label span {

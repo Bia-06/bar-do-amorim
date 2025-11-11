@@ -107,9 +107,6 @@
 }
 
 .work-form .checkbox-label input[type="checkbox"] {
-  display: block;
-  -webkit-appearance: none;
-  appearance: none;
   width: 20px;
   height: 20px;
   border: 2px solid #8b4513;
