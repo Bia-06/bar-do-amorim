@@ -38,7 +38,7 @@
 
 .review-form {
   justify-content: space-between;
-  overflow: visible;        /* garante botão inteiro */
+  overflow: visible;        /* desktop: deixa o botão aparecer */
 }
 
 .reviews-list {
@@ -446,18 +446,28 @@
     padding: 0 1rem;
   }
 
-  /* 👇 mantém o mesmo comportamento do desktop: altura fixa + scroll interno */
+  /* mantém o mesmo limite do desktop */
   .review-form,
   .reviews-list {
     padding: 1.75rem 1.25rem;
     width: 100%;
     margin: 0 auto;
-    height: 780px;       /* mesma altura do desktop */
+    height: 860px;
   }
 
-  .form-content,
+  /* 👇 aqui é o conserto: deixa o formulário rolar por dentro */
+  .review-form {
+    overflow: hidden;           /* esconde o que passar do card */
+  }
+
+  .form-content {
+    flex: 1;
+    overflow-y: auto;           /* rola dentro do card */
+    margin-bottom: 1rem;
+  }
+
   .reviews-content {
-    max-height: none;    /* já têm height via flex, então só rolam */
+    max-height: 580px;          /* um pouco menos pra caber no mobile */
   }
 
   .contact-method {
