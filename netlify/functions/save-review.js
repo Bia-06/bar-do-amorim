@@ -30,7 +30,7 @@ exports.handler = async (event) => {
   try {
     const { name, email, phone, rating, comment, consent, contactMethod } = JSON.parse(event.body);
 
-    // Validação da nota
+    // validação da nota
     if (!rating || rating < 1 || rating > 5) {
       return {
         statusCode: 400,
@@ -38,6 +38,12 @@ exports.handler = async (event) => {
         body: JSON.stringify({ error: 'Avaliação deve ser entre 1 e 5 estrelas' })
       };
     }
+
+    // 👇 gera data/hora de São Paulo
+    // fica assim: "2025-11-11T21:53:00"
+    const dataAvaliacao = new Date()
+      .toLocaleString('sv-SE', { timeZone: 'America/Sao_Paulo', hour12: false })
+      .replace(' ', 'T');
 
     const { data, error } = await supabase
       .from('avaliacoes')
@@ -49,7 +55,9 @@ exports.handler = async (event) => {
           nota: rating,
           comentario: comment,
           metodo_contato: contactMethod,
-          consentimento: consent
+          consentimento: consent,
+          // 👇 envia pro banco já no horário de SP
+          data_avaliacao: dataAvaliacao
         }
       ]);
 
@@ -60,18 +68,18 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         message: 'Avaliação salva com sucesso!',
-        data 
+        data
       })
     };
   } catch (error) {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         error: 'Erro ao salvar avaliação',
-        details: error.message 
+        details: error.message
       })
     };
   }
