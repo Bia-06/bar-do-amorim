@@ -58,7 +58,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // Inserir no Supabase
+    // Inserir no Supabase - CORRIGIDO
     const { data, error } = await supabase
       .from('trabalhe_conosco')
       .insert([
@@ -71,11 +71,12 @@ exports.handler = async (event) => {
           cidade,
           mensagem,
           consentimento: consent,
-          curriculo_nome: 'Arquivo enviado',
-          created_at: new Date().toISOString()
+          curriculo_nome: 'Arquivo enviado'
+          // REMOVIDO: created_at - a coluna não existe
+          // A coluna data_candidatura já tem valor default (now())
         }
       ])
-      .select(); // Adicione .select() para retornar os dados inseridos
+      .select();
 
     if (error) {
       console.error('Erro do Supabase:', error);

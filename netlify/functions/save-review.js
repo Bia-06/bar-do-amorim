@@ -39,8 +39,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // 👇 gera data/hora de São Paulo
-    // fica assim: "2025-11-11T21:53:00"
+    // data/hora São Paulo
     const dataAvaliacao = new Date()
       .toLocaleString('sv-SE', { timeZone: 'America/Sao_Paulo', hour12: false })
       .replace(' ', 'T');
@@ -55,8 +54,8 @@ exports.handler = async (event) => {
           nota: rating,
           comentario: comment,
           metodo_contato: contactMethod,
-          consentimento: consent,
-          // 👇 envia pro banco já no horário de SP
+          // 👇 força booleano: se veio true do front, salva true; senão, false
+          consentimento: !!consent,
           data_avaliacao: dataAvaliacao
         }
       ]);
