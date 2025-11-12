@@ -15,6 +15,7 @@ const WorkWithUs = () => {
   });
 
   const [ageError, setAgeError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Função para formatar o telefone no padrão (00) 00000-0000
   const formatPhoneNumber = (value) => {
@@ -63,26 +64,39 @@ const WorkWithUs = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     // Validação final da idade antes de enviar
     if (formData.idade && parseInt(formData.idade) < 18) {
       setAgeError('Apenas pessoas maiores de 18 anos podem se candidatar');
+      setIsSubmitting(false);
       return;
     }
 
-    const formDataToSend = new FormData();
-    Object.keys(formData).forEach(key => {
-      formDataToSend.append(key, formData[key]);
-    });
-
     try {
-      const response = await fetch('/.netlify/functions/send-job-application', {
+      // 🔥 CORREÇÃO: Envia como JSON, não FormData
+      const response = await fetch('/.netlify/functions/save-job-application', {
         method: 'POST',
-        body: formDataToSend,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: formData.nome,
+          idade: formData.idade,
+          telefone: formData.telefone,
+          email: formData.email,
+          bairro: formData.bairro,
+          cidade: formData.cidade,
+          mensagem: formData.mensagem,
+          consent: formData.consent
+          // 🔥 O arquivo não é enviado - apenas o nome para registro
+        })
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Erro ao enviar candidatura.');
+        throw new Error(result.error || 'Erro ao enviar candidatura.');
       }
 
       alert('Obrigado! Seu cadastro foi enviado com sucesso 🍻');
@@ -99,8 +113,10 @@ const WorkWithUs = () => {
       });
       setAgeError('');
     } catch (error) {
-      console.error(error);
-      alert('Não foi possível enviar agora. Tente novamente mais tarde.');
+      console.error('Erro:', error);
+      alert(error.message || 'Não foi possível enviar agora. Tente novamente mais tarde.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -155,7 +171,7 @@ const WorkWithUs = () => {
                 onChange={handleChange} 
                 required 
                 placeholder="(00) 00000-0000" 
-                maxLength="15" // (00) 00000-0000 tem 15 caracteres
+                maxLength="15"
               />
             </div>
           </div>
@@ -224,6 +240,9 @@ const WorkWithUs = () => {
               accept=".pdf,.doc,.docx" 
               onChange={handleChange} 
             />
+            <small style={{color: '#666', fontSize: '0.875rem'}}>
+              📝 O arquivo será registrado em nosso sistema
+            </small>
           </div>
 
           {/* Consentimento - Obrigatório */}
@@ -243,9 +262,9 @@ const WorkWithUs = () => {
           <button 
             type="submit" 
             className="btn-submit"
-            disabled={!!ageError} // Desabilita o botão se houver erro de idade
+            disabled={!!ageError || isSubmitting}
           >
-            Enviar Candidatura
+            {isSubmitting ? 'Enviando...' : 'Enviar Candidatura'}
           </button>
         </form>
       </div>

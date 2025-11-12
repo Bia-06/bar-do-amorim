@@ -5,6 +5,8 @@ const supabaseKey = process.env.SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 exports.handler = async (event) => {
+  console.log('🚀 Function save-job-application executada');
+  
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -12,6 +14,7 @@ exports.handler = async (event) => {
   };
 
   if (event.httpMethod === 'OPTIONS') {
+    console.log('✅ OPTIONS request - CORS pré-flight');
     return {
       statusCode: 200,
       headers,
@@ -20,6 +23,7 @@ exports.handler = async (event) => {
   }
 
   if (event.httpMethod !== 'POST') {
+    console.log('❌ Método não permitido:', event.httpMethod);
     return {
       statusCode: 405,
       headers,
@@ -28,7 +32,27 @@ exports.handler = async (event) => {
   }
 
   try {
+    console.log('📦 Body recebido:', event.body);
+    
+    if (!event.body) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Dados não recebidos' })
+      };
+    }
+
     const { nome, idade, telefone, email, bairro, cidade, mensagem, consent } = JSON.parse(event.body);
+    console.log('📋 Dados parseados:', { nome, idade, telefone, email, bairro, cidade });
+
+    // Validação básica
+    if (!nome || !telefone || !idade || !bairro || !cidade) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Nome, telefone, idade, bairro e cidade são obrigatórios' })
+      };
+    }
 
     // Validação de idade
     if (parseInt(idade) < 18) {
@@ -39,6 +63,8 @@ exports.handler = async (event) => {
       };
     }
 
+    console.log('🚀 Tentando inserir no Supabase...');
+    
     const { data, error } = await supabase
       .from('trabalhe_conosco')
       .insert([
@@ -46,21 +72,22 @@ exports.handler = async (event) => {
           nome,
           idade: parseInt(idade),
           telefone,
-          email,
+          email: email || '',
           bairro,
           cidade,
-          mensagem,
-          // 👇 mesma lógica do código de avaliações
+          mensagem: mensagem || '',
           consentimento: !!consent,
-          curriculo_nome: 'Arquivo enviado'
-          // data_candidatura tem default now(), não precisa enviar
+          curriculo_nome: 'Currículo anexado'
         }
       ]);
 
     if (error) {
+      console.error('❌ Erro do Supabase:', error);
       throw error;
     }
 
+    console.log('✅ Sucesso! Dados inseridos no Supabase');
+    
     return {
       statusCode: 200,
       headers,
@@ -70,6 +97,7 @@ exports.handler = async (event) => {
       })
     };
   } catch (error) {
+    console.error('💥 Erro geral:', error);
     return {
       statusCode: 500,
       headers,
