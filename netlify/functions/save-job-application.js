@@ -1,14 +1,7 @@
 const { createClient } = require('@supabase/supabase-js');
 
-// Use nomes mais específicos para evitar conflitos
-const supabaseUrl = process.env.SUPABASE_URL || process.env.REACT_APP_SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.REACT_APP_SUPABASE_ANON_KEY;
-
-// Verifica se as variáveis existem
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Variáveis do Supabase não configuradas');
-}
-
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 exports.handler = async (event) => {
@@ -37,18 +30,6 @@ exports.handler = async (event) => {
   try {
     const { nome, idade, telefone, email, bairro, cidade, mensagem, consent } = JSON.parse(event.body);
 
-    // Log para debug
-    console.log('Dados recebidos:', { nome, email, bairro });
-
-    // Validação básica
-    if (!nome || !email || !telefone) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: 'Nome, email e telefone são obrigatórios' })
-      };
-    }
-
     // Validação de idade
     if (parseInt(idade) < 18) {
       return {
@@ -58,7 +39,6 @@ exports.handler = async (event) => {
       };
     }
 
-    // Inserir no Supabase - CORRIGIDO
     const { data, error } = await supabase
       .from('trabalhe_conosco')
       .insert([
@@ -70,35 +50,32 @@ exports.handler = async (event) => {
           bairro,
           cidade,
           mensagem,
-          consentimento: consent,
+          // 👇 mesma lógica do código de avaliações
+          consentimento: !!consent,
           curriculo_nome: 'Arquivo enviado'
-          // REMOVIDO: created_at - a coluna não existe
-          // A coluna data_candidatura já tem valor default (now())
+          // data_candidatura tem default now(), não precisa enviar
         }
-      ])
-      .select();
+      ]);
 
     if (error) {
-      console.error('Erro do Supabase:', error);
       throw error;
     }
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         message: 'Candidatura enviada com sucesso!',
-        data 
+        data
       })
     };
   } catch (error) {
-    console.error('Erro geral:', error);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         error: 'Erro ao enviar candidatura',
-        details: error.message 
+        details: error.message
       })
     };
   }

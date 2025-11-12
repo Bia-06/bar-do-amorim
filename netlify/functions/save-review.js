@@ -30,7 +30,17 @@ exports.handler = async (event) => {
   try {
     const { name, email, phone, rating, comment, consent, contactMethod } = JSON.parse(event.body);
 
-    // validação da nota
+    // ---------- normaliza o consent vindo do front ----------
+    // pode vir true, "true", "on", 1, "1"...
+    const consentimentoFinal =
+      consent === true ||
+      consent === 'true' ||
+      consent === 'on' ||
+      consent === 1 ||
+      consent === '1';
+    // --------------------------------------------------------
+
+    // Validação da nota
     if (!rating || rating < 1 || rating > 5) {
       return {
         statusCode: 400,
@@ -39,7 +49,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // data/hora São Paulo
+    // data/hora de São Paulo
     const dataAvaliacao = new Date()
       .toLocaleString('sv-SE', { timeZone: 'America/Sao_Paulo', hour12: false })
       .replace(' ', 'T');
@@ -54,8 +64,7 @@ exports.handler = async (event) => {
           nota: rating,
           comentario: comment,
           metodo_contato: contactMethod,
-          // 👇 força booleano: se veio true do front, salva true; senão, false
-          consentimento: !!consent,
+          consentimento: consentimentoFinal, // 👈 agora vai booleano mesmo
           data_avaliacao: dataAvaliacao
         }
       ]);
