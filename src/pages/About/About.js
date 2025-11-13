@@ -65,7 +65,7 @@ const About = () => {
                     <img src="/images/icons/e-mail.png" alt="Email" />
                   </span>
                   <div className="contact-text">
-                    <strong>Email:</strong> bardoamorim_2020@outlook.com
+                    <strong>Email:</strong> contato@bardoamorim.com.br
                     <span className="contact-note">(para currículo)</span>
                   </div>
                 </div>

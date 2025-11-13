@@ -75,7 +75,7 @@ const Footer = () => {
                   alt="Email"
                 />
               </span>
-              bardoamorim_2020@outlook.com
+              contato@bardoamorim.com.br
             </p>
           </div>
 

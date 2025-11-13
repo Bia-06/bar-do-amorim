@@ -99,7 +99,7 @@ const WorkWithUs = () => {
         throw new Error(result.error || 'Erro ao enviar candidatura.');
       }
 
-      alert('Obrigado! Seu cadastro foi enviado com sucesso 🍻');
+      alert('Obrigado! Sua candidatura foi enviado com sucesso 🍻');
       setFormData({
         nome: '',
         idade: '',
