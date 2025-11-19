@@ -66,22 +66,26 @@ const WorkWithUs = () => {
     }
 
     try {
+      // 🔥 MUDANÇA: Usar FormData em vez de JSON
+      const formDataToSend = new FormData();
+      formDataToSend.append('nome', formData.nome);
+      formDataToSend.append('idade', formData.idade);
+      formDataToSend.append('telefone', formData.telefone);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('bairro', formData.bairro);
+      formDataToSend.append('cidade', formData.cidade);
+      formDataToSend.append('mensagem', formData.mensagem);
+      formDataToSend.append('consentimento', formData.consentimento);
+      
+      // 🔥 AGORA envia o arquivo REAL
+      if (formData.curriculo) {
+        formDataToSend.append('curriculo_arquivo', formData.curriculo);
+      }
+
       const response = await fetch('/processa_trabalhe.php', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          nome: formData.nome,
-          idade: formData.idade,
-          telefone: formData.telefone,
-          email: formData.email,
-          bairro: formData.bairro,
-          cidade: formData.cidade,
-          mensagem: formData.mensagem,
-          curriculo_nome: formData.curriculo ? formData.curriculo.name : null,
-          consentimento: formData.consentimento
-        })
+        // 🔥 REMOVER headers - o browser define automaticamente para FormData
+        body: formDataToSend
       });
 
       const result = await response.json();
@@ -120,7 +124,7 @@ const WorkWithUs = () => {
           Preencha o formulário abaixo e envie seu currículo para avaliarmos sua candidatura.
         </p>
 
-        <form onSubmit={handleSubmit} className="work-form">
+        <form onSubmit={handleSubmit} className="work-form" encType="multipart/form-data">
           <div className="form-group">
             <label htmlFor="nome">Nome Completo *</label>
             <input 
@@ -215,7 +219,7 @@ const WorkWithUs = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="curriculo">Anexar Currículo (PDF ou DOC)</label>
+            <label htmlFor="curriculo">Anexar Currículo (PDF ou DOC) *</label>
             <input 
               type="file" 
               id="curriculo" 
@@ -224,7 +228,7 @@ const WorkWithUs = () => {
               onChange={handleChange} 
             />
             <small style={{color: '#666', fontSize: '0.875rem'}}>
-              O arquivo será registrado em nosso sistema
+              Agora o arquivo será salvo em nosso sistema
             </small>
           </div>
 
