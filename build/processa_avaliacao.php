@@ -35,11 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     try {
-        $sql = "INSERT INTO avaliacoes (nome, email, telefone, nota, comentario, metodo_contato, consentimento) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)";
+        // Aprovação automática se consentiu
+        $aprovado = $consentimento ? 1 : 0;
+        
+        $sql = "INSERT INTO avaliacoes (nome, email, telefone, nota, comentario, metodo_contato, consentimento, aprovado) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$nome, $email, $telefone, $nota, $comentario, $metodo_contato, $consentimento]);
+        $stmt->execute([$nome, $email, $telefone, $nota, $comentario, $metodo_contato, $consentimento, $aprovado]);
         
         echo json_encode(["success" => true, "message" => "Avaliação enviada com sucesso!"]);
     } catch(Exception $e) {
