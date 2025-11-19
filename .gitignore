@@ -1,2 +1,21 @@
-# Local Netlify folder
-.netlify
+# Dependências
+/node_modules
+
+# Produção - não versionar build
+/build
+
+# Environment
+.env
+.env.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
