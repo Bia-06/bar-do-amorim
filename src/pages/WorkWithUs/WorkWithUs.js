@@ -169,14 +169,15 @@ const WorkWithUs = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">E-mail</label>
+            <label htmlFor="email">E-mail *</label>
             <input 
               type="email" 
               id="email" 
               name="email" 
               value={formData.email} 
               onChange={handleChange} 
-              placeholder="seu@email.com" 
+              placeholder="seu@email.com"
+              required 
             />
           </div>
 
@@ -219,7 +220,7 @@ const WorkWithUs = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="curriculo">Anexar Currículo (PDF ou DOC) *</label>
+            <label htmlFor="curriculo">Anexar Currículo (PDF ou DOC)</label>
             <input 
               type="file" 
               id="curriculo" 
@@ -228,7 +229,7 @@ const WorkWithUs = () => {
               onChange={handleChange} 
             />
             <small style={{color: '#666', fontSize: '0.875rem'}}>
-              Agora o arquivo será salvo em nosso sistema
+              O arquivo será salvo em nosso sistema
             </small>
           </div>
 

@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "./static/css/main.6273f371.css",
-    "main.js": "./static/js/main.64c39a9f.js",
+    "main.js": "./static/js/main.a774615f.js",
     "static/media/bar-amorim-bg.jpg": "./static/media/bar-amorim-bg.3c3d93bf69ad67e97ced.jpg",
     "index.html": "./index.html",
     "main.6273f371.css.map": "./static/css/main.6273f371.css.map",
-    "main.64c39a9f.js.map": "./static/js/main.64c39a9f.js.map"
+    "main.a774615f.js.map": "./static/js/main.a774615f.js.map"
   },
   "entrypoints": [
     "static/css/main.6273f371.css",
-    "static/js/main.64c39a9f.js"
+    "static/js/main.a774615f.js"
   ]
 }
