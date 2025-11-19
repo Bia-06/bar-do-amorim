@@ -224,7 +224,7 @@ const WorkWithUs = () => {
               onChange={handleChange} 
             />
             <small style={{color: '#666', fontSize: '0.875rem'}}>
-              📝 O arquivo será registrado em nosso sistema
+              O arquivo será registrado em nosso sistema
             </small>
           </div>
 
