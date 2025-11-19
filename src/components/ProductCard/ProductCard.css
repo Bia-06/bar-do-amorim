@@ -18,10 +18,6 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* ÁREA DA IMAGEM
-   - altura fixa
-   - independente do tamanho/resolução da imagem original
-*/
 .product-image {
   width: 100%;
   height: 220px !important;
@@ -35,12 +31,11 @@
   flex-shrink: 0;
 }
 
-
 /* imagem dentro da área fixa */
 .product-image-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;      /* corta e preenche */
+  object-fit: cover;      
   object-position: center center;
   transition: transform 0.3s ease;
 }
@@ -68,17 +63,13 @@
   margin-bottom: 0.5rem;
 }
 
-/* ÁREA DE TEXTO / INFO
-   - ocupa o resto do card
-   - faz o preço grudar embaixo
-*/
 .product-info {
-  flex: 1; /* preenche todo o espaço restante abaixo da imagem */
+  flex: 1; 
   display: flex;
   flex-direction: column;
 
   padding: 1.5rem;
-  min-height: 0; /* importante para evitar overflow */
+  min-height: 0; 
 }
 
 .product-name {
@@ -93,14 +84,12 @@
   line-height: 1.5;
   margin-bottom: 1rem;
 
-  /* deixa descrição ocupar só um pedacinho fixo */
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  /* firefox-ish fallback */
   line-clamp: 3;
 }
 
@@ -156,11 +145,11 @@
 @media (max-width: 768px) {
 
   .product-card {
-    min-height: 360px !important;  /* cards um pouco mais baixos no mobile */
+    min-height: 360px !important;  
   }
 
   .product-image { 
-    height: 180px !important;      /* imagem um pouco mais baixa no mobile */
+    height: 180px !important;     
   }
 
   .product-info {

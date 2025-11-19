@@ -5,15 +5,14 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // sempre que o pathname mudar, sobe pro topo
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth', // troca pra 'smooth' se você quiser animação
+      behavior: 'smooth', 
     });
   }, [pathname]);
 
-  return null; // esse componente não renderiza nada visível
+  return null;
 };
 
 export default ScrollToTop;

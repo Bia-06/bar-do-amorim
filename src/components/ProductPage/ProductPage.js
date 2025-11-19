@@ -34,7 +34,6 @@ const ProductPage = () => {
     }
   };
 
-  // labels dinâmicos
   const getPriceLabels = () => {
     if (
       product.category?.toLowerCase().includes('bebida') || 

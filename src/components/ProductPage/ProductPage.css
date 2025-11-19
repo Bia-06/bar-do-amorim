@@ -37,7 +37,6 @@
   transform: translateX(-5px);
 }
 
-/* --- Layout melhorado --- */
 .product-layout {
   display: flex;
   background: white;
@@ -49,7 +48,6 @@
   padding: 2rem;
 }
 
-/* Área da imagem do produto */
 .product-image-section {
   flex: 0 0 420px;
   display: flex;
@@ -58,7 +56,6 @@
   padding: 1rem 0;
 }
 
-/* Moldura que se ajusta ao tamanho natural da imagem */
 .product-image-container {
   position: relative;
   display: inline-block;
@@ -77,9 +74,9 @@
   transform: translateY(-3px);
 }
 
-/* A foto em si */
+
 .product-image {
-  display: block;    /* remove espaço embaixo do <img> */
+  display: block;    
   width: 100%;
   height: auto;
   border-radius: 0;
@@ -91,7 +88,6 @@
   transform: scale(1.03);
 }
 
-/* --- Seção de informações --- */
 .product-info-section {
   flex: 1;
   padding: 1.6rem;
@@ -114,7 +110,6 @@
   margin-bottom: 1.3rem;
 }
 
-/* --- Tabela de preços --- */
 .price-section {
   background: #f8f9fa;
   border-radius: 10px;
@@ -157,7 +152,6 @@
   font-size: 0.95rem;
 }
 
-/* --- Observação --- */
 .product-observation {
   background: #fff5f5;
   border-left: 4px solid #dc3545;
@@ -187,16 +181,16 @@
   }
 
   .product-image-container {
-    max-width: 320px;         /* controla o tamanho no tablet/celular */
+    max-width: 320px;         
     width: 100%;
-    border-width: 6px;        /* borda um pouco mais fina em telas menores */
+    border-width: 6px;        
     border-radius: 20px;
     box-shadow: 0 14px 30px rgba(0,0,0,0.08);
   }
 
   .product-image {
     width: 100%;
-    height: auto;            /* mantém proporção original */
+    height: auto;           
   }
 
   .product-info-section {
@@ -214,8 +208,8 @@
 
 @media (max-width: 480px) {
   .product-image-container {
-    max-width: 260px;        /* um pouco menor pra caber em telas bem estreitas */
-    border-width: 5px;       /* borda ainda proporcional */
+    max-width: 260px;        
+    border-width: 5px;       
     border-radius: 18px;
     box-shadow: 0 12px 24px rgba(0,0,0,0.08);
   }
@@ -224,9 +218,8 @@
     font-size: 1.4rem;
   }
 }
-/* PRODUCT PAGE - ajustes só para mobile */
 @media (max-width: 768px) {
-  /* descrição exibida completa no mobile */
+  
   .product-info-section .product-description {
     display: block;
     -webkit-line-clamp: unset;
@@ -237,7 +230,7 @@
     margin-bottom: 1.2rem;
   }
 
-  /* centralizar a parte de preço no mobile */
+ 
   .price-section,
   .price-single-card,
   .price-single-section {
@@ -253,7 +246,7 @@
     justify-content: space-between;
   }
 }
-/* --- Tracinho sutil acima do preço --- */
+
 .price-section::before,
 .price-single-card::before,
 .price-single-section::before {
@@ -262,6 +255,6 @@
   width: 60px;
   height: 3px;
   background: var(--primary-brown);
-  margin: 0 auto 1rem; /* centraliza e dá espaçamento */
+  margin: 0 auto 1rem; 
   border-radius: 2px;
 }

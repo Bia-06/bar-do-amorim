@@ -1,4 +1,3 @@
-// components/ProductModal/ProductModal.js
 import React, { useEffect } from 'react';
 import { usePriceFormatter } from '../../hooks/usePriceFormatter';
 import './ProductModal.css';
@@ -6,7 +5,6 @@ import './ProductModal.css';
 const ProductModal = ({ product, onClose }) => {
   const { formatPrice } = usePriceFormatter();
 
-  // Fechar modal com ESC
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.keyCode === 27) {

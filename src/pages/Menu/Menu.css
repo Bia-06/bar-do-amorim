@@ -68,7 +68,6 @@
 
 /* =========== CATEGORIAS DESKTOP / MOBILE =========== */
 
-/* containers que vamos alternar */
 .desktop-only {
   display: block !important;
 }
@@ -76,7 +75,6 @@
   display: none !important;
 }
 
-/* layout base desktop (duas fileiras horizontais com 5 itens cada) */
 .category-filters {
   display: flex;
   flex-direction: column;
@@ -93,7 +91,6 @@
   width: 100%;
 }
 
-/* BOTÕES DE CATEGORIA (estilo desktop) */
 .category-btn {
   display: flex;
   align-items: center;
@@ -429,7 +426,7 @@
     align-items: center;
     gap: 4px;
     text-align: center;
-    white-space: normal; /* permite quebra em "Happy Hour" */
+    white-space: normal;
   }
 
   .mobile-only .category-btn img,
@@ -628,7 +625,7 @@
 }
 
 .subcategory-container {
-  background-color: #daccc6; /* bege rosado mais suave */
+  background-color: #daccc6; 
   padding: 0.8rem 1rem;
   border-radius: 12px;
   display: flex;
@@ -656,7 +653,7 @@
 
 /* Subcategoria ativa */
 .subcategory-btn.active {
-  background-color: #8b5e3c; /* igual ao marrom ativo das categorias */
+  background-color: #8b5e3c; 
   color: #fff;
   border-color: #8b5e3c;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
@@ -700,13 +697,13 @@
     height: 160px;
   }
 }
-/* --- Tracinho sutil e longo acima do preço nos cards do menu --- */
+
 .product-price::before {
   content: "";
   display: block;
-  width: 85%; /* quase do tamanho total do card */
-  height: 2px; /* mais fino e elegante */
-  background: rgba(139, 69, 19, 0.2); /* marrom claro e translúcido */
-  margin: 0.8rem auto 0.8rem; /* centraliza e espaça */
+  width: 85%; 
+  height: 2px; 
+  background: rgba(139, 69, 19, 0.2); 
+  margin: 0.8rem auto 0.8rem; 
   border-radius: 2px;
 }

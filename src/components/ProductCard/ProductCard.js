@@ -6,9 +6,7 @@ import './ProductCard.css';
 const ProductCard = ({ product }) => {
   const { formatPrice } = usePriceFormatter();
 
-  // Função para salvar a categoria atual antes de navegar
   const handleProductClick = () => {
-    // Salva a categoria atual no localStorage para restaurar ao voltar
     const currentCategory = product.category || 'todos';
     localStorage.setItem('selectedCategory', currentCategory);
   };
@@ -17,7 +15,7 @@ const ProductCard = ({ product }) => {
     <Link 
       to={`/produto/${product.id}`} 
       className="product-card-link"
-      onClick={handleProductClick} // ADICIONADO onClick
+      onClick={handleProductClick} 
     >
       <div className="product-card">
         <div className="product-image">
@@ -28,7 +26,6 @@ const ProductCard = ({ product }) => {
               className="product-image-img"
             />
           ) : (
-            // REMOVIDO O PLACEHOLDER "Imagem não disponível"
             <div className="image-placeholder">
               <span>📷</span>
             </div>

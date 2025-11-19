@@ -2,14 +2,12 @@ import React from 'react';
 import './FloatingIfood.css';
 
 const FloatingIfood = () => {
-  // URL do seu iFood - SUBSTITUA pela URL real do seu estabelecimento
   const ifoodUrl = "https://www.ifood.com.br/delivery/marilia-sp/bar-do-amorim-jardim-maria-izabel/675aa472-71d1-4911-858a-d664fec469a4"; // ← SUBSTITUA XXXXX pelo ID real
 
   const handleIfoodClick = () => {
     // Abre o iFood em uma nova aba
     window.open(ifoodUrl, '_blank', 'noopener,noreferrer');
     
-    // Opcional: Tracking de clique
     if (window.gtag) {
       window.gtag('event', 'ifood_click', {
         'event_category': 'conversion',

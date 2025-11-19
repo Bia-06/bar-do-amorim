@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 
-// componente simples pra todos os ícones
 const Icon = ({ src, alt }) => (
   <img src={src} alt={alt} className="header-icon" />
 );
@@ -11,7 +10,6 @@ const Header = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Fecha o menu quando a rota muda
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
@@ -42,7 +40,7 @@ const Header = () => {
           </div>
         </Link>
 
-        {/* Botão hamburguer (mobile) */}
+        {/* Botão (mobile) */}
         <button
           className="mobile-menu-btn"
           onClick={toggleMenu}

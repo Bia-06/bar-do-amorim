@@ -26,7 +26,6 @@
   fill: white;
 }
 
-/* Tooltip igual ao do iFood */
 .whatsapp-tooltip {
   position: absolute;
   right: 80px;
@@ -50,7 +49,6 @@
   right: 85px;
 }
 
-/* Responsivo WhatsApp */
 @media (max-width: 768px) {
   .whatsapp-button {
     bottom: 20px;

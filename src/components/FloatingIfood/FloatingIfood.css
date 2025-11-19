@@ -1,6 +1,6 @@
 .floating-ifood {
   position: fixed;
-  bottom: 115px; /* 70px (whatsapp) + 15px (espaço) + 30px (posição whatsapp) */
+  bottom: 115px; 
   right: 30px;
   z-index: 1000;
   display: flex;
@@ -22,7 +22,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  order: 2; /* Botão fica à direita */
+  order: 2; 
 }
 
 .ifood-button:hover {
@@ -48,7 +48,7 @@
   font-size: 1rem;
   white-space: nowrap;
   backdrop-filter: blur(10px);
-  order: 1; /* Tooltip fica à esquerda */
+  order: 1; 
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -62,7 +62,7 @@
 /* Responsivo */
 @media (max-width: 768px) {
   .floating-ifood {
-    bottom: 85px; /* 55px (whatsapp mobile) + 10px (espaço) + 20px (posição whatsapp) */
+    bottom: 85px; 
     right: 20px;
     gap: 12px;
   }

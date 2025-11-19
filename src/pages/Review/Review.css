@@ -11,7 +11,6 @@
   font-weight: bold;
 }
 
-/* ===== LAYOUT PRINCIPAL ===== */
 .review-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -21,7 +20,6 @@
   align-items: stretch;
 }
 
-/* ===== FORMULÁRIO E LISTA - MESMA ALTURA ===== */
 .review-form,
 .reviews-list {
   background-color: var(--light-text);
@@ -33,20 +31,19 @@
   flex-direction: column;
   box-sizing: border-box;
   position: relative;
-  height: 780px;            /* ALTURA FIXA pros dois */
+  height: 780px;           
 }
 
 .review-form {
   justify-content: space-between;
-  overflow: visible;        /* desktop: deixa o botão aparecer */
+  overflow: visible;        
 }
 
 .reviews-list {
-  overflow: hidden;         /* quadro não cresce, só conteúdo */
+  overflow: hidden;         
   background: var(--light-text);
 }
 
-/* ===== CONTEÚDO SCROLLÁVEL DO FORMULÁRIO ===== */
 .form-content {
   flex: 1;
   overflow-y: auto;
@@ -55,7 +52,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* ===== BOTÃO FIXO NA PARTE INFERIOR ===== */
 .form-footer {
   flex-shrink: 0;
   margin-top: auto;
@@ -63,7 +59,6 @@
   border-top: 1px solid rgba(139, 69, 19, 0.1);
 }
 
-/* ===== TÍTULO DA LISTA ===== */
 .reviews-list h2 {
   color: var(--primary-brown);
   margin-bottom: 1.5rem;
@@ -73,17 +68,15 @@
   padding: 0;
 }
 
-/* ===== CONTEÚDO SCROLLÁVEL DAS AVALIAÇÕES ===== */
 .reviews-content {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 0.5rem;
-  max-height: 660px;        /* 780 - paddings - título ≈ 660 */
+  max-height: 660px;        
   margin: 0;
 }
 
-/* ===== CAMPOS ===== */
 .review-form .form-group {
   margin-bottom: 1.5rem;
 }
@@ -113,7 +106,6 @@
   box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
 }
 
-/* ===== MÉTODO DE CONTATO ===== */
 .contact-method {
   display: flex;
   gap: 1rem;
@@ -185,7 +177,6 @@
   opacity: 0;
 }
 
-/* ===== ÍCONES DE CONTATO ===== */
 .icon-text {
   display: flex;
   align-items: center;
@@ -210,7 +201,6 @@
   filter: brightness(1);
 }
 
-/* ===== Estrelas ===== */
 .star-rating {
   display: flex;
   align-items: center;
@@ -246,7 +236,6 @@
   font-weight: 500;
 }
 
-/* ===== CONSENTIMENTO REVIEW ===== */
 .review-form .form-group.consent-group {
   width: 100%;
   margin-top: 1rem;
@@ -295,7 +284,6 @@
   color: var(--primary-brown);
 }
 
-/* ===== Botão Review ===== */
 .review-form .btn-submit {
   background: linear-gradient(135deg, var(--light-brown), var(--lighter-brown));
   color: var(--light-text);
@@ -327,7 +315,6 @@
   box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3) !important;
 }
 
-/* ===== ITEM DE AVALIAÇÃO ===== */
 .review-item {
   background: white;
   padding: 1.8rem;
@@ -348,7 +335,6 @@
   margin-bottom: 0;
 }
 
-/* ===== CABEÇALHO DA AVALIAÇÃO ===== */
 .review-header {
   display: flex;
   justify-content: space-between;
@@ -372,7 +358,6 @@
   flex-shrink: 0;
 }
 
-/* ===== COMENTÁRIO ===== */
 .review-comment {
   color: #555;
   font-size: 1rem;
@@ -381,7 +366,6 @@
   font-style: italic;
 }
 
-/* ===== DATA ===== */
 .review-date {
   color: #888;
   font-size: 0.85rem;
@@ -390,7 +374,6 @@
   gap: 0.5rem;
 }
 
-/* ===== ESTADOS DE CARREGAMENTO ===== */
 .loading-text {
   text-align: center;
   color: var(--primary-brown);
@@ -411,7 +394,6 @@
   font-style: italic;
 }
 
-/* ===== SCROLL PERSONALIZADO ===== */
 .form-content::-webkit-scrollbar,
 .reviews-content::-webkit-scrollbar {
   width: 6px;
@@ -446,7 +428,6 @@
     padding: 0 1rem;
   }
 
-  /* mantém o mesmo limite do desktop, só que um pouco mais alto no mobile */
   .review-form,
   .reviews-list {
     padding: 1.75rem 1.25rem;
@@ -455,7 +436,6 @@
     height: 860px;
   }
 
-  /* formulário rola por dentro */
   .review-form {
     overflow: hidden;
   }
@@ -466,10 +446,8 @@
     margin-bottom: 1rem;
   }
 
-  /* 👇 aqui aumentei o limite pra mostrar mais cards antes do scroll */
   .reviews-content {
-    max-height: 720px;                /* era 580px */
-  }
+    max-height: 720px;               
 
   .contact-method {
     flex-direction: column;
@@ -481,7 +459,6 @@
     margin-top: 0.5rem;
   }
 
-  /* 👇 força o scroll marrom no mobile também */
   .reviews-content::-webkit-scrollbar {
     width: 6px;
   }
@@ -492,7 +469,7 @@
   }
 
   .reviews-content::-webkit-scrollbar-thumb {
-    background: #8b4513;              /* marrom */
+    background: #8b4513;            
     border-radius: 3px;
   }
 
@@ -500,11 +477,12 @@
     background: #a3632b;
   }
 }
-/* ===== DATA E HORÁRIO ===== */
+
 .review-date {
   color: #888;
   font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
 }

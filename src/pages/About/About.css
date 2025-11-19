@@ -29,7 +29,6 @@
   color: #666;
 }
 
-/* Seção Unificada - Contato + Mapa dentro da mesma caixa */
 .unified-contact-section {
   margin-top: 2rem;
 }
@@ -212,12 +211,7 @@
     font-size: 1rem;
   }
 }
-/* ======================= */
-/* CARTÃO: CONTATO & MAPA  */
-/* ======================= */
 
-/* já existia .contact-details — mantém igual */
-/* agora vamos aplicar o MESMO estilo na .map-container */
 .map-container {
   display: flex;
   flex-direction: column;
@@ -300,41 +294,30 @@
   box-shadow: 0 10px 20px rgba(139, 69, 19, 0.3);
 }
 
-/* ícone que aparece no endereço (fundo claro) */
 .map-icon-inline img {
   width: 22px;
   height: 22px;
   object-fit: contain;
   margin-top: 2px;
-  /* sem filtro! mantém as cores originais do PNG */
 }
 
-/* ícone que aparece dentro do botão (fundo marrom/gradiente) */
 .map-icon-button {
   width: 22px;
   height: 22px;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* deixa o ícone branco para contraste */
+  filter: brightness(0) invert(1); 
 }
 
-
-/* ======================= */
-/* LAYOUT AJUSTE GERAL     */
-/* ======================= */
-
-/* deixa os 2 cartões com alturas mais parecidas em tela grande */
 .contact-content {
   align-items: stretch;
 }
 
-/* força cartões a ocupar altura total da célula da grid em desktop */
 .contact-details,
 .map-container {
   height: 100%;
   box-sizing: border-box;
 }
 
-/* RESPONSIVO: mobile empilha e centraliza */
 @media (max-width: 768px) {
   .map-container {
     padding: 1.5rem;
@@ -368,7 +351,6 @@
     padding: 0.7rem 1rem;
   }
 
-  /* já existia responsivo de .contact-details, mas vamos harmonizar */
   .contact-details {
     text-align: left;
   }
@@ -417,21 +399,19 @@
   object-fit: contain;
   margin-top: 2px;
 }
-/* garante que o mapa não estoura no mobile */
+
 .about-map iframe {
   width: 100%;
   display: block;
   border: 0;
 }
 
-/* segurança extra: se algum mapa vier direto dentro do .map-container */
 .map-container iframe {
   width: 100%;
   display: block;
   border: 0;
 }
 
-/* no mobile, força mesmo */
 @media (max-width: 768px) {
   .about-map iframe,
   .map-container iframe {
@@ -443,9 +423,7 @@
     padding: 1.5rem 1.25rem;
   }
 }
-/* ====== CORREÇÃO DE DESALINHAMENTO MOBILE (iOS + Android) ====== */
 
-/* garante que nada passe de 100% no mobile */
 @media (max-width: 768px) {
   .about-page,
   .about-page .container,
@@ -459,7 +437,6 @@
     box-sizing: border-box;
   }
 
-  /* zera qualquer deslocamento lateral que vier de padding somado */
   .about-page .container {
     margin-left: auto;
     margin-right: auto;
@@ -467,7 +444,6 @@
     padding-right: 1rem;
   }
 
-  /* grid empilhado, mas centralizado */
   .contact-content {
     display: flex;
     flex-direction: column;
@@ -475,13 +451,11 @@
     align-items: stretch;
   }
 
-  /* cartões ocupam a largura toda */
   .contact-details,
   .map-container {
     width: 100%;
   }
 
-  /* iframe nunca estoura no iOS */
   .about-map,
   .about-map iframe {
     width: 100% !important;
@@ -489,7 +463,6 @@
     display: block;
   }
 
-  /* botão centralizado de verdade */
   .map-button {
     display: inline-flex;
     margin-left: auto;
@@ -497,7 +470,6 @@
   }
 }
 
-/* às vezes o iOS cria scroll lateral por 1px — mata aqui */
 @media (max-width: 480px) {
   body {
     overflow-x: hidden;

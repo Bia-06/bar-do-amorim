@@ -1,21 +1,21 @@
 :root {
-  /* Cores principais - Versão Marrom Levemente Mais Clara */
-  --primary-brown: #3a2315;    /* Antes: #2a1a0f → um marrom médio-escuro */
-  --light-brown: #6d4c41;      /* Antes: #5d4037 → ligeiramente mais claro */
-  --lighter-brown: #a1887f;    /* Antes: #8d6e63 → marrom médio quente */
+  /* Cores principais */
+  --primary-brown: #3a2315;    
+  --light-brown: #6d4c41;      
+  --lighter-brown: #a1887f;    
   
   /* Cores de texto e fundo */
-  --dark-bg: #1a120d;          /* Fundo principal ainda escuro, mas não preto */
-  --darker-bg: #120c08;        /* Fundo mais escuro */
-  --card-bg: #2b1a12;          /* Fundo de cards com leve contraste */
-  --light-text: #f0e6e2;       /* Texto claro com tom quente */
-  --cream: #e8d6cf;            /* Creme mais visível sobre fundo marrom */
+  --dark-bg: #1a120d;          
+  --darker-bg: #120c08;        
+  --card-bg: #2b1a12;         
+  --light-text: #f0e6e2;       
+  --cream: #e8d6cf;            
   
   /* Cores de destaque */
-  --accent-gold: #d4b27f;      /* Dourado levemente mais vibrante */
-  --accent-dark: #4e342e;      /* Marrom escuro para detalhes */
+  --accent-gold: #d4b27f;      
+  --accent-dark: #4e342e;      
   
-  /* Outras variáveis (mantidas) */
+  /* Outras variáveis */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;

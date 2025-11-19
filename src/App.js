@@ -30,11 +30,7 @@ function App() {
               <Route path="/sobre" element={<About />} />
               <Route path="/avalie" element={<Review />} />
               <Route path="/ambiente" element={<Ambiente />} />
-
-              {/* nova página */}
               <Route path="/trabalhe-conosco" element={<WorkWithUs />} />
-
-              {/* se quiser manter o caminho antigo com W maiúsculo, deixa como alias */}
               <Route path="/workwithus" element={<WorkWithUs />} />
             </Routes>
           </main>

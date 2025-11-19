@@ -11,21 +11,16 @@ const WorkWithUs = () => {
     cidade: '',
     mensagem: '',
     curriculo: null,
-    consent: false
+    consentimento: false
   });
 
   const [ageError, setAgeError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Função para formatar o telefone no padrão (00) 00000-0000
   const formatPhoneNumber = (value) => {
-    // Remove tudo que não é número
     const numbers = value.replace(/\D/g, '');
-    
-    // Limita a 11 dígitos (DDD + 9 dígitos)
     const limitedNumbers = numbers.slice(0, 11);
     
-    // Aplica a formatação
     if (limitedNumbers.length <= 2) {
       return limitedNumbers;
     } else if (limitedNumbers.length <= 6) {
@@ -42,7 +37,6 @@ const WorkWithUs = () => {
     
     let newValue = value;
     
-    // Aplica formatação automática para telefone
     if (name === 'telefone') {
       newValue = formatPhoneNumber(value);
     }
@@ -52,7 +46,6 @@ const WorkWithUs = () => {
       [name]: type === 'checkbox' ? checked : type === 'file' ? files[0] : newValue
     });
 
-    // Validação em tempo real para idade
     if (name === 'idade') {
       if (value && parseInt(value) < 18) {
         setAgeError('Apenas pessoas maiores de 18 anos podem se candidatar');
@@ -66,7 +59,6 @@ const WorkWithUs = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Validação final da idade antes de enviar
     if (formData.idade && parseInt(formData.idade) < 18) {
       setAgeError('Apenas pessoas maiores de 18 anos podem se candidatar');
       setIsSubmitting(false);
@@ -74,8 +66,7 @@ const WorkWithUs = () => {
     }
 
     try {
-      // 🔥 CORREÇÃO: Envia como JSON, não FormData
-      const response = await fetch('/.netlify/functions/save-job-application', {
+      const response = await fetch('/processa_trabalhe.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,18 +79,18 @@ const WorkWithUs = () => {
           bairro: formData.bairro,
           cidade: formData.cidade,
           mensagem: formData.mensagem,
-          consent: formData.consent
-          // 🔥 O arquivo não é enviado - apenas o nome para registro
+          curriculo_nome: formData.curriculo ? formData.curriculo.name : null,
+          consentimento: formData.consentimento
         })
       });
 
       const result = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result.error || 'Erro ao enviar candidatura.');
+      if (!result.success) {
+        throw new Error(result.message || 'Erro ao enviar candidatura.');
       }
 
-      alert('Obrigado! Sua candidatura foi enviado com sucesso 🍻');
+      alert('Obrigado! Sua candidatura foi enviada com sucesso 🍻');
       setFormData({
         nome: '',
         idade: '',
@@ -109,7 +100,7 @@ const WorkWithUs = () => {
         cidade: '',
         mensagem: '',
         curriculo: null,
-        consent: false
+        consentimento: false
       });
       setAgeError('');
     } catch (error) {
@@ -130,7 +121,6 @@ const WorkWithUs = () => {
         </p>
 
         <form onSubmit={handleSubmit} className="work-form">
-          {/* Nome Completo - Obrigatório */}
           <div className="form-group">
             <label htmlFor="nome">Nome Completo *</label>
             <input 
@@ -144,7 +134,6 @@ const WorkWithUs = () => {
           </div>
 
           <div className="form-row">
-            {/* Idade - Obrigatório */}
             <div className="form-group">
               <label htmlFor="idade">Idade *</label>
               <input 
@@ -160,7 +149,6 @@ const WorkWithUs = () => {
               {ageError && <div className="error-message">{ageError}</div>}
             </div>
             
-            {/* Telefone - Obrigatório */}
             <div className="form-group">
               <label htmlFor="telefone">Telefone *</label>
               <input 
@@ -176,7 +164,6 @@ const WorkWithUs = () => {
             </div>
           </div>
 
-          {/* Email - Opcional */}
           <div className="form-group">
             <label htmlFor="email">E-mail</label>
             <input 
@@ -190,7 +177,6 @@ const WorkWithUs = () => {
           </div>
 
           <div className="form-row">
-            {/* Bairro - Obrigatório */}
             <div className="form-group">
               <label htmlFor="bairro">Bairro *</label>
               <input 
@@ -203,7 +189,6 @@ const WorkWithUs = () => {
               />
             </div>
             
-            {/* Cidade - Obrigatório */}
             <div className="form-group">
               <label htmlFor="cidade">Cidade *</label>
               <input 
@@ -217,7 +202,6 @@ const WorkWithUs = () => {
             </div>
           </div>
 
-          {/* Mensagem - Opcional */}
           <div className="form-group">
             <label htmlFor="mensagem">Fale um pouco sobre você</label>
             <textarea 
@@ -230,7 +214,6 @@ const WorkWithUs = () => {
             ></textarea>
           </div>
 
-          {/* Currículo - Obrigatório */}
           <div className="form-group">
             <label htmlFor="curriculo">Anexar Currículo (PDF ou DOC)</label>
             <input 
@@ -245,13 +228,12 @@ const WorkWithUs = () => {
             </small>
           </div>
 
-          {/* Consentimento - Obrigatório */}
           <div className="form-group consent-group">
             <label className="checkbox-label">
               <input 
                 type="checkbox" 
-                name="consent" 
-                checked={formData.consent} 
+                name="consentimento" 
+                checked={formData.consentimento} 
                 onChange={handleChange} 
                 required 
               />

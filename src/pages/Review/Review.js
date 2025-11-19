@@ -3,23 +3,23 @@ import './Review.css';
 
 const Review = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    nome: '',
     email: '',
-    phone: '',
-    rating: 0,
-    comment: '',
-    consent: false
+    telefone: '',
+    nota: 0,
+    comentario: '',
+    consentimento: false
   });
   const [hoverRating, setHoverRating] = useState(0);
-  const [contactMethod, setContactMethod] = useState('email');
+  const [metodo_contato, setMetodoContato] = useState('email');
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadReviews = async () => {
     try {
-      const response = await fetch('/.netlify/functions/get-reviews');
+      const response = await fetch('/processa_avaliacao.php?action=get');
       const result = await response.json();
-      if (response.ok) {
+      if (response.ok && result.success) {
         setReviews(result.reviews || []);
       }
     } catch (error) {
@@ -51,7 +51,7 @@ const Review = () => {
     const { name, value, type, checked } = e.target;
     let newValue = value;
 
-    if (name === 'phone') {
+    if (name === 'telefone') {
       newValue = formatPhoneNumber(value);
     }
 
@@ -64,7 +64,7 @@ const Review = () => {
   const handleRatingClick = (stars) => {
     setFormData({
       ...formData,
-      rating: stars
+      nota: stars
     });
   };
 
@@ -72,45 +72,46 @@ const Review = () => {
     e.preventDefault();
 
     const payload = {
-      name: formData.name,
+      nome: formData.nome,
       email: formData.email,
-      phone: formData.phone,
-      rating: formData.rating,
-      comment: formData.comment,
-      consent: formData.consent,
-      contactMethod: contactMethod
+      telefone: formData.telefone,
+      nota: formData.nota,
+      comentario: formData.comentario,
+      metodo_contato: metodo_contato,
+      consentimento: formData.consentimento
     };
 
     try {
-      const response = await fetch('/.netlify/functions/save-review', {
+      const response = await fetch('/processa_avaliacao.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw new Error(err.error || 'Erro ao enviar avaliação');
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.message || 'Erro ao enviar avaliação');
       }
 
       alert('Obrigado pela sua avaliação!');
 
       setFormData({
-        name: '',
+        nome: '',
         email: '',
-        phone: '',
-        rating: 0,
-        comment: '',
-        consent: false
+        telefone: '',
+        nota: 0,
+        comentario: '',
+        consentimento: false
       });
       setHoverRating(0);
-      setContactMethod('email');
+      setMetodoContato('email');
 
       await loadReviews();
 
     } catch (error) {
       console.error(error);
-      alert('Não foi possível enviar agora. Tente novamente.');
+      alert(error.message || 'Não foi possível enviar agora. Tente novamente.');
     }
   };
 
@@ -120,7 +121,7 @@ const Review = () => {
         <button
           key={star}
           type="button"
-          className={`star ${star <= (hoverRating || formData.rating) ? 'filled' : ''}`}
+          className={`star ${star <= (hoverRating || formData.nota) ? 'filled' : ''}`}
           onClick={() => handleRatingClick(star)}
           onMouseEnter={() => setHoverRating(star)}
           onMouseLeave={() => setHoverRating(0)}
@@ -130,7 +131,7 @@ const Review = () => {
         </button>
       ))}
       <span className="rating-text">
-        {formData.rating > 0 ? `${formData.rating} estrela${formData.rating > 1 ? 's' : ''}` : 'Clique para avaliar'}
+        {formData.nota > 0 ? `${formData.nota} estrela${formData.nota > 1 ? 's' : ''}` : 'Clique para avaliar'}
       </span>
     </div>
   );
@@ -149,12 +150,12 @@ const Review = () => {
             <form onSubmit={handleSubmit}>
               <div className="form-content">
                 <div className="form-group">
-                  <label htmlFor="name">Nome e Sobrenome *</label>
+                  <label htmlFor="nome">Nome e Sobrenome *</label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                    id="nome"
+                    name="nome"
+                    value={formData.nome}
                     onChange={handleChange}
                     required
                   />
@@ -169,8 +170,8 @@ const Review = () => {
                         id="email-contact"
                         name="contactMethod"
                         value="email"
-                        checked={contactMethod === 'email'}
-                        onChange={(e) => setContactMethod(e.target.value)}
+                        checked={metodo_contato === 'email'}
+                        onChange={(e) => setMetodoContato(e.target.value)}
                         required
                       />
                       <label htmlFor="email-contact" className="radio-label">
@@ -186,8 +187,8 @@ const Review = () => {
                         id="phone-contact"
                         name="contactMethod"
                         value="phone"
-                        checked={contactMethod === 'phone'}
-                        onChange={(e) => setContactMethod(e.target.value)}
+                        checked={metodo_contato === 'phone'}
+                        onChange={(e) => setMetodoContato(e.target.value)}
                         required
                       />
                       <label htmlFor="phone-contact" className="radio-label">
@@ -201,18 +202,18 @@ const Review = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor={contactMethod}>
-                    {contactMethod === 'email' ? 'Email *' : 'Telefone *'}
+                  <label htmlFor={metodo_contato}>
+                    {metodo_contato === 'email' ? 'Email *' : 'Telefone *'}
                   </label>
                   <input
-                    type={contactMethod === 'email' ? 'email' : 'tel'}
-                    id={contactMethod}
-                    name={contactMethod}
-                    value={formData[contactMethod]}
+                    type={metodo_contato === 'email' ? 'email' : 'tel'}
+                    id={metodo_contato}
+                    name={metodo_contato}
+                    value={formData[metodo_contato]}
                     onChange={handleChange}
                     required
-                    placeholder={contactMethod === 'email' ? 'seu@email.com' : '(00) 00000-0000'}
-                    maxLength={contactMethod === 'phone' ? '15' : undefined}
+                    placeholder={metodo_contato === 'email' ? 'seu@email.com' : '(00) 00000-0000'}
+                    maxLength={metodo_contato === 'phone' ? '15' : undefined}
                   />
                 </div>
 
@@ -222,11 +223,11 @@ const Review = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="comment">Comentário</label>
+                  <label htmlFor="comentario">Comentário</label>
                   <textarea
-                    id="comment"
-                    name="comment"
-                    value={formData.comment}
+                    id="comentario"
+                    name="comentario"
+                    value={formData.comentario}
                     onChange={handleChange}
                     rows="5"
                     placeholder="Conte-nos sobre sua experiência..."
@@ -237,8 +238,8 @@ const Review = () => {
                   <label className="checkbox-label">
                     <input
                       type="checkbox"
-                      name="consent"
-                      checked={formData.consent}
+                      name="consentimento"
+                      checked={formData.consentimento}
                       onChange={handleChange}
                     />
                     <span>Concordo em compartilhar minha avaliação publicamente</span>
@@ -250,7 +251,7 @@ const Review = () => {
                 <button
                   type="submit"
                   className="btn-submit"
-                  disabled={formData.rating === 0}
+                  disabled={formData.nota === 0}
                 >
                   Enviar Avaliação
                 </button>

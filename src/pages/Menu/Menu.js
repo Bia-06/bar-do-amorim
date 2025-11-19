@@ -5,7 +5,6 @@ import { usePriceFormatter } from '../../hooks/usePriceFormatter';
 import { useLocation } from 'react-router-dom';
 import './Menu.css';
 
-// Constantes para evitar repetição e melhorar manutenibilidade
 const CATEGORIES = {
   TODOS: 'todos',
   HAPPY_HOUR: 'happy-hour',
@@ -45,9 +44,7 @@ const Menu = () => {
   const location = useLocation();
   usePriceFormatter();
 
-  // ADICIONE ESTE useEffect PARA CARREGAR A CATEGORIA DA URL OU DO localStorage
   useEffect(() => {
-    // Função para extrair parâmetros da URL (movida para dentro do useEffect)
     const getUrlParams = () => {
       const searchParams = new URLSearchParams(location.search);
       const categoria = searchParams.get('categoria');
@@ -59,7 +56,6 @@ const Menu = () => {
     console.log('Parâmetro da URL:', categoria);
     
     if (categoria) {
-      // Mapeia os parâmetros da URL para as constantes de categoria
       const categoryMap = {
         'happy-hour': CATEGORIES.HAPPY_HOUR,
         'almoco': CATEGORIES.ALMOCO,
@@ -72,12 +68,10 @@ const Menu = () => {
         console.log('Categoria mapeada:', mappedCategory);
         setActiveCategory(mappedCategory);
         setActiveSubcategory(SUBCATEGORIES.TODOS);
-        // Salva no localStorage
         localStorage.setItem('selectedCategory', mappedCategory);
         localStorage.setItem('selectedSubcategory', SUBCATEGORIES.TODOS);
       }
     } else {
-      // Se não há parâmetro na URL, carrega do localStorage
       const savedCategory = localStorage.getItem('selectedCategory');
       const savedSubcategory = localStorage.getItem('selectedSubcategory');
       
@@ -90,11 +84,9 @@ const Menu = () => {
         setActiveSubcategory(savedSubcategory);
       }
     }
-  }, [location.search]); // Executa quando a query string mudar
+  }, [location.search]); 
 
-  // ADICIONE ESTE useEffect PARA SALVAR A CATEGORIA NO localStorage
   useEffect(() => {
-    // Salva a categoria ativa sempre que ela mudar
     if (activeCategory && activeCategory !== 'todos') {
       localStorage.setItem('selectedCategory', activeCategory);
     }
@@ -474,7 +466,7 @@ const Menu = () => {
     {
       id: 22,
       name: "Azeitona",
-      image: "/images/produtos/Aperitivo Azeitona.jpg",
+      image: "/images/produtos/apazeitona.jpg",
       price: 19.90,
       category: CATEGORIES.APERITIVO
     },
@@ -488,14 +480,14 @@ const Menu = () => {
     {
       id: 24,
       name: "Ovo de Codorna",
-      image: "/images/produtos/Aperitivo Ovo de Codorna.jpg",
+      image: "/images/produtos/apcodorna.jpg",
       price: 18.00,
       category: CATEGORIES.APERITIVO
     },
     {
       id: 25,
       name: "Palitos de Cenoura",
-      image: "/images/produtos/Aperitivo Palito de Cenoura.jpg",
+      image: "/images/produtos/apcenoura.jpg",
       price: 18.00,
       category: CATEGORIES.APERITIVO
     },
@@ -509,7 +501,7 @@ const Menu = () => {
     {
       id: 27,
       name: "Torresminho à Pururuca",
-      image: "/images/produtos/Adc Torresminho.jpg",
+      image: "/images/produtos/AdcTorresminho.jpg",
       price: 25.00,
       category: CATEGORIES.APERITIVO
     },
@@ -545,7 +537,7 @@ const Menu = () => {
       description: "Filé mignon empanado, coberto com mussarela, regado de um delicioso molho parmegiana, salpicado com parmesão. Acompanha batata chips, arroz branco e banana à milanesa.",
       price: 62.90,
       category: CATEGORIES.JANTAR,
-      image: "/images/produtos/File a Parmegiana.jpg",
+      image: "/images/produtos/FileParmegiana.jpg",
       details: {
         individual: "R$ 62,90",
         media: "Não disponível", 
@@ -556,7 +548,7 @@ const Menu = () => {
       id: 32,
       name: "Filé Parmegiana Carioca",
       description: "Filé mignon empanado com molho sugo, palmito, ervilhas frescas e azeitona. Acompanha batata chips, arroz branco e banana à milanesa.",
-      image: "/images/produtos/File a Parmegiana Carioca.jpg",
+      image: "/images/produtos/FileCarioca.jpg",
       price: 190.00,
       category: CATEGORIES.JANTAR,
     },
@@ -590,7 +582,7 @@ const Menu = () => {
       id: 36,
       name: "Filé Mignon ao Alho",
       description: "Espeto de filé mignon ao alho 250g. Acompanha vinagrete e farofa da casa.",
-      image: "/images/produtos/File Mignon ao Alho.jpg",
+      image: "/images/produtos/FileAlho.jpg",
       price: 39.90,
       category: CATEGORIES.ESPETOS
     },
@@ -598,7 +590,7 @@ const Menu = () => {
       id: 37,
       name: "Linguiça",
       description: "Espeto de linguiça 250g. Acompanha vinagrete e farofa da casa.",
-      image: "/images/produtos/Espeto de Linguiça.jpg",
+      image: "/images/produtos/Linguica.jpg",
       price: 19.90,
       category: CATEGORIES.ESPETOS
     },
@@ -606,7 +598,7 @@ const Menu = () => {
       id: 38,
       name: "Panceta",
       description: "Espeto de panceta 250g. Acompanha vinagrete e farofa da casa.",
-      image: "/images/produtos/Espeto de Panceta.jpg",
+      image: "/images/produtos/Panceta.jpg",
       price: 19.90,
       category: CATEGORIES.ESPETOS
     },
@@ -614,7 +606,7 @@ const Menu = () => {
       id: 39,
       name: "Queijo",
       description: "Espeto de queijo bolinha 250g. Acompanha vinagrete e farofa da casa.",
-      image: "/images/produtos/Espeto de Queijo.jpg",
+      image: "/images/produtos/Queijo.jpg",
       price: 25.90,
       category: CATEGORIES.ESPETOS
     },
@@ -622,7 +614,7 @@ const Menu = () => {
       id: 40,
       name: "Coração de Frango",
       description: "Espeto de coração de frango 250g. Acompanha vinagrete e farofa da casa.",
-      image: "/images/produtos/Coração de Frango.jpg",
+      image: "/images/produtos/Coracao.jpg",
       price: 24.00,
       category: CATEGORIES.ESPETOS
     },
@@ -638,7 +630,7 @@ const Menu = () => {
       id: 42,
       name: "Medalhão de Frango",
       description: "Espeto de medalhão de frango 250g. Acompanha vinagrete e farofa da casa.",
-      image: "/images/produtos/Medalhão de Frango.jpg",
+      image: "/images/produtos/Medalhao.jpg",
       price: 25.90,
       category: CATEGORIES.ESPETOS
     },
@@ -646,7 +638,7 @@ const Menu = () => {
       id: 43,
       name: "Pão de Alho",
       description: "Espeto de pão de alho. Acompanha vinagrete e farofa da casa.",
-      image: "/images/produtos/Pão de Alho.jpg",
+      image: "/images/produtos/PaoAlho.jpg",
       price: 13.90,
       category: CATEGORIES.ESPETOS
     },
@@ -662,7 +654,7 @@ const Menu = () => {
       id: 45,
       name: "Churrasquinho com Legumes",
       description: "Espetinho de miolo de ácem com legumes 150g (Não tem acompanhamento).",
-      image: "/images/produtos/Churrasquinho com Legumes.jpg",
+      image: "/images/produtos/ChurrasLegumes.jpg",
       price: 18.90,
       category: CATEGORIES.ESPETOS
     },
@@ -678,7 +670,7 @@ const Menu = () => {
       id: 47,
       name: "Frango",
       description: "Espetinho de frango 150g (Não tem acompanhamento).",
-      image: "/images/produtos/Espeto de Frango.jpg",
+      image: "/images/produtos/EspetoFrango.jpg",
       price: 17.90,
       category: CATEGORIES.ESPETOS
     },
@@ -686,7 +678,7 @@ const Menu = () => {
       id: 48,
       name: "Kit Churrasco com Alcatra",
       description: "Kit churrasco com 2 espetos de sua escolha (não incluso Filé Mignon). Acompanha: mandioca cozida, farofa da casa, vinagrete, molhinho da casa e arroz à grega.",
-      image: "/images/produtos/Kit Churrasco.jpg",
+      image: "/images/produtos/KitChurrasco.jpg",
       price: 78.00,
       category: CATEGORIES.ESPETOS
     },
@@ -694,7 +686,7 @@ const Menu = () => {
       id: 49,
       name: "Kit Churrasco com Fraldinha",
       description: "Kit churrasco com 2 espetos de sua escolha (não incluso Alcatra e Filé Mignon). Acompanha: mandioca cozida, farofa da casa, vinagrete, molhinho da casa e arroz à grega.",
-      image: "/images/produtos/Kit Churrasco.jpg",
+      image: "/images/produtos/KitChurrasco.jpg",
       price: 72.00,
       category: CATEGORIES.ESPETOS
     },
@@ -720,7 +712,7 @@ const Menu = () => {
       description: "Acompanha arroz ou pãozinho.",
       price: 45.00,
       category: CATEGORIES.PORCOES,
-      image: "/images/produtos/Lingua de Boi.jpg",
+      image: "/images/produtos/Lingua.jpg",
       subcategory: SUBCATEGORIES.COMIDA_BOTECO,
       details: {
         individual: "R$ 45,00",
@@ -748,7 +740,7 @@ const Menu = () => {
       description: "Acompanha mandioca frita.",
       price: 44.00,
       category: CATEGORIES.PORCOES,
-      image: "/images/produtos/Torresminho a Pururuca.jpg",
+      image: "/images/produtos/TorresminhoPururuca.jpg",
       subcategory: SUBCATEGORIES.COMIDA_BOTECO,
       details: {
         individual: "R$ 44,00",
@@ -761,7 +753,7 @@ const Menu = () => {
       name: "Torresmo de Rolo",
       description: "Acompanha vinagrete, farofa da casa, mandioca cozida e molhinho da casa.",
       price: 45.00,
-      image: "/images/produtos/Torresmo de Rolo.jpg",
+      image: "/images/produtos/TorresmoRolo.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.COMIDA_BOTECO,
        details: {
@@ -776,7 +768,7 @@ const Menu = () => {
       name: "Carne Seca Acebolada",
       description: "Acompanha mandioca frita.",
       price: 79.90,
-      image: "/images/produtos/Carne Seca Acebolada com Mandioca Frita.jpg",
+      image: "/images/produtos/CarneSeca.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
     },
@@ -785,7 +777,7 @@ const Menu = () => {
       name: "Calabresa Acebolada",
       description: "Acompanha pãozinho.",
       price: 79.90,
-      image: "/images/produtos/Calabresa Acebolada.jpg",
+      image: "/images/produtos/CalabresaAcebolada.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
     },
@@ -794,7 +786,7 @@ const Menu = () => {
       name: "Costelinha de Porco",
       description: "Acompanha mandioca frita e molhinho da casa.",
       price: 79.90,
-      image: "/images/produtos/Costelinha de Porco com Mandioca Frita.jpg",
+      image: "/images/produtos/Costelinha.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
     },
@@ -803,7 +795,7 @@ const Menu = () => {
       name: "Frango à Passarinho",
       description: "Acompanha fritas.",
       price: 45.00,
-      image: "/images/produtos/Frango a Passarinho.jpg",
+      image: "/images/produtos/FrangoPassarinho.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -816,7 +808,7 @@ const Menu = () => {
       id: 59,
       name: "Frango Chapeado",
       price: 66.00,
-      image: "/images/produtos/Frango Chapeado.jpg",
+      image: "/images/produtos/FrangoChapeado.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
     },
@@ -825,7 +817,7 @@ const Menu = () => {
       name: "Frango Crocante",
       description: "Acompanha maionese trufada com queijo especial.",
       price: 76.00,
-      image: "/images/produtos/Frango Crocante.jpg",
+      image: "/images/produtos/FrangoCrocante.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
     },
@@ -847,7 +839,7 @@ const Menu = () => {
       name: "Fritas com Cheddar e Bacon",
       description: "Acompanha molhinho da casa.",
       price: 39.00,
-      image: "/images/produtos/Fritas Cheedar e Bacon.jpg",
+      image: "/images/produtos/FritasCheedar.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -861,7 +853,7 @@ const Menu = () => {
       name: "Fritas com Queijo e Bacon",
       description: "Acompanha molhinho da casa.",
       price: 39.00,
-      image: "/images/produtos/Fritas Queijo e Bacon.jpg",
+      image: "/images/produtos/FritasQueijo.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -875,7 +867,7 @@ const Menu = () => {
       name: "Fritas Temperada da Casa",
       description: "Batata rústica com tempero especial da casa, acompanha molhinho da casa.",
       price: 49.00,
-      image: "/images/produtos/Fritas Temperada da Casa.jpg",
+      image: "/images/produtos/FritasTemperada.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
     },
@@ -884,7 +876,7 @@ const Menu = () => {
       name: "Isca de Frango",
       description: "Acompanha fritas.",
       price: 45.00,
-      image: "/images/produtos/Isca de Frango.jpg",
+      image: "/images/produtos/IscaFrango.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -898,7 +890,7 @@ const Menu = () => {
       name: "Isca de Tilápia",
       description: "Acompanha fritas.",
       price: 58.00,
-      image: "/images/produtos/Isca de Tilapia.jpg",
+      image: "/images/produtos/IscaTilapia.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -912,7 +904,7 @@ const Menu = () => {
       name: "Linguiça Caipira",
       description: "Servida na chapa com molho de cerveja e pimenta biquinho.",
       price: 76.00,
-      image: "/images/produtos/Linguiça Caipira.jpg",
+      image: "/images/produtos/LinguicaCaipira.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
     },
@@ -921,7 +913,7 @@ const Menu = () => {
       name: "Mandioca ao Bacon",
       description: "Mandioca frita enrolada ao bacon em fatias.",
       price: 38.00,
-      image: "/images/produtos/Mandioca ao Bacon.jpg",
+      image: "/images/produtos/MandiocaBacon.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -935,7 +927,7 @@ const Menu = () => {
       name: "Porção da Patroa (1,5kg)",
       description: "Linguiça caseira, carne seca acebolada, torresmo à pururuca e mandioca frita.",
       price: 130.00,
-      image: "/images/produtos/Porção da Patroa.jpg",
+      image: "/images/produtos/PorcaoPatroa.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
     },
@@ -953,7 +945,7 @@ const Menu = () => {
       id: 71,
       name: "Bolinho de Bacalhau",
       price: 65.00,
-      image: "/images/produtos/Bolinho de Bacalhau.jpg",
+      image: "/images/produtos/BolinhoBacalhau.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.BOLINHOS_BOTECO,
       details: {
@@ -967,7 +959,7 @@ const Menu = () => {
       name: "Bolinho de Camarão",
       description: "6 unidades.",
       price: 79.00,
-      image: "/images/produtos/Bolinho de Camarão.jpg",
+      image: "/images/produtos/BolinhoCamarao.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.BOLINHOS_BOTECO,
     },
@@ -976,7 +968,7 @@ const Menu = () => {
       name: "Bolinho de Feijoada",
       description: "6 unidades.",
       price: 54.00,
-      image: "/images/produtos/Bolinho de Feijoada1.jpg",
+      image: "/images/produtos/BolinhoFeijoada1.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.BOLINHOS_BOTECO,
     },
@@ -984,7 +976,7 @@ const Menu = () => {
       id: 74,
       name: "Bolinho de Linguiça com Queijo",
       price: 55.00,
-      image: "/images/produtos/Bolinho de Linguiça1.jpg",
+      image: "/images/produtos/BolinhoLinguica1.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.BOLINHOS_BOTECO,
       details: {
@@ -997,7 +989,7 @@ const Menu = () => {
       id: 75,
       name: "Bolinho de Mandioca com Carne Seca",
       price: 66.00,
-      image: "/images/produtos/Bolinho de Mandioca com Carne Seca.jpg",
+      image: "/images/produtos/BolinhoCarneSeca.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.BOLINHOS_BOTECO,
       details: {
@@ -1024,7 +1016,7 @@ const Menu = () => {
       name: "Mix Amorim",
       description: "Bolinho de mandioca com carne seca, kibe e pastel de carne e queijo. Acompanha molhinho da casa.",
       price: 49.00,
-      image: "/images/produtos/Mix Amorim.jpg",
+      image: "/images/produtos/MixAmorim.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -1038,7 +1030,7 @@ const Menu = () => {
       name: "Ovo de Porca",
       description: "Bolinho com recheio de linguiça caseira e ovo cozido (3 unidades).",
       price: 39.00,
-      image: "/images/produtos/Ovo de Porca.jpg",
+      image: "/images/produtos/OvoPorca.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.BOLINHOS_BOTECO,
     },
@@ -1047,7 +1039,7 @@ const Menu = () => {
       name: "Pastelzinho",
       description: "Pastelzinho de carne e queijo.",
       price: 39.00,
-      image: "/images/produtos/Pastelzinho de Boteco.jpg",
+      image: "/images/produtos/PastelzinhoBoteco.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -1061,7 +1053,7 @@ const Menu = () => {
       name: "Salgadinho de Boteco",
       description: "Coxinha de frango e bolinha de queijo.",
       price: 38.00,
-      image: "/images/produtos/Salgadinho de Boteco.jpg",
+      image: "/images/produtos/SalgadinhoBoteco.jpg",
       category: CATEGORIES.PORCOES,
       subcategory: SUBCATEGORIES.PORCOES_BOTECO,
       details: {
@@ -1367,7 +1359,7 @@ const Menu = () => {
       name: "Caipirinha Tradicional 350ml",
       description: "Limão, morango, abacaxi, maracujá ou kiwi.",
       price: 19.00,
-      image: "/images/produtos/Caipi Tradicional.jpg",
+      image: "/images/produtos/CaipiTrad.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.CAIPIRINHAS,
       details: {
@@ -1381,7 +1373,7 @@ const Menu = () => {
       name: "Caipirinha Especial 350ml",
       description: "Limão com morango, abacaxi com hortelã, mix de frutas, tangerina com pimenta, frutas vermelhas ou cerveja.",
       price: 20.00,
-      image: "/images/produtos/Caipi Especial.jpg",
+      image: "/images/produtos/CaipiEspecial.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.CAIPIRINHAS,
       details: {
@@ -1395,7 +1387,7 @@ const Menu = () => {
       name: "Caipirinha no Pote 600ml",
       description: "Sabor à escolher, todos disponíveis.",
       price: 29.00,
-      image: "/images/produtos/Caipi Pote.jpg",
+      image: "/images/produtos/CaipiPote.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.CAIPIRINHAS,
       details: {
@@ -1411,7 +1403,7 @@ const Menu = () => {
       name: "Amorim Beach",
       description: "Gin, fatias de laranja e monster mango loco.",
       price: 30.00,
-      image: "/images/produtos/Amorim Beach.jpg",
+      image: "/images/produtos/AmorimBeach.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.DRINKS_SUB
     },
@@ -1419,7 +1411,7 @@ const Menu = () => {
       id: 125,
       name: "Batidinha de Vinho com Morango",
       price: 24.00,
-      image: "/images/produtos/Batida de Vinho com Morango.jpg",
+      image: "/images/produtos/Batida.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.DRINKS_SUB
     },
@@ -1427,7 +1419,7 @@ const Menu = () => {
       id: 126,
       name: "Drink sem Alcool",
       price: 20.00,
-      image: "/images/produtos/Drink sem Alcool.jpg",
+      image: "/images/produtos/DrinksemAlcool.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.DRINKS_SUB
     },
@@ -1435,7 +1427,7 @@ const Menu = () => {
       id: 127,
       name: "Gin com Frutas",
       price: 29.00,
-      image: "/images/produtos/Gin com Frutas.jpg",
+      image: "/images/produtos/GinFrutas.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.DRINKS_SUB
     },
@@ -1444,7 +1436,7 @@ const Menu = () => {
       name: "Gin da Patroa",
       description: "Gin, suco de laranja, rodelas de limão e tônica.",
       price: 29.00,
-      image: "/images/produtos/Gin da Patroa.jpg",
+      image: "/images/produtos/GinPatroa.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.DRINKS_SUB
     },
@@ -1453,7 +1445,7 @@ const Menu = () => {
       name: "Gin Classic",
       description: "Gin, hortelã, rodelas de limão e água tônica.",
       price: 29.00,
-      image: "/images/produtos/Gin Classic.jpg",
+      image: "/images/produtos/GinClassic.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.DRINKS_SUB
     },
@@ -1462,7 +1454,7 @@ const Menu = () => {
       name: "Gin com Energético",
       description: "Gin, rodelas de laranja e energético.",
       price: 29.00,
-      image: "/images/produtos/Gin com Energetico.jpg",
+      image: "/images/produtos/GinEnergetico.jpg",
       category: CATEGORIES.DRINKS,
       subcategory: SUBCATEGORIES.DRINKS_SUB
     },
@@ -1583,7 +1575,7 @@ const Menu = () => {
       name: "Porção do Happy",
       description: "Ceviche, isca de frango, frios, bolinha de queijo e coxinha de frango.",
       price: 56.90,
-      image: "/images/produtos/Porção do Happy.jpg",
+      image: "/images/produtos/PorcaoHappy.jpg",
       category: CATEGORIES.HAPPY_HOUR,
       subcategory: SUBCATEGORIES.PORCOES_HAPPY
     },
@@ -1592,7 +1584,7 @@ const Menu = () => {
       name: "Bolinho de Linguiça",
       description: "Recheado com queijo (6 unidades)",
       price: 39.00,
-      image: "/images/produtos/Bolinho de Linguiça1.jpg",
+      image: "/images/produtos/BolinhoLinguica.jpg",
       category: CATEGORIES.HAPPY_HOUR,
       subcategory: SUBCATEGORIES.PORCOES_HAPPY
     },
@@ -1601,7 +1593,7 @@ const Menu = () => {
       name: "Bolinho de Feijoada",
       description: "3 unidades",
       price: 30.00,
-      image: "/images/produtos/Bolinho de Feijoada1.jpg",
+      image: "/images/produtos/BolinhoFeijoada.jpg",
       category: CATEGORIES.HAPPY_HOUR,
       subcategory: SUBCATEGORIES.PORCOES_HAPPY
     },
@@ -1610,7 +1602,7 @@ const Menu = () => {
       name: "Ovo de Porca",
       description: "Delicioso bolinho com recheio de linguiça caseira e ovo cozido (3 unidades)",
       price: 34.00,
-      image: "/images/produtos/Ovo de Porca.jpg",
+      image: "/images/produtos/OvoPorca.jpg",
       category: CATEGORIES.HAPPY_HOUR,
       subcategory: SUBCATEGORIES.PORCOES_HAPPY
     },
@@ -1619,7 +1611,7 @@ const Menu = () => {
       name: "Fritas Temperada da Casa",
       description: "Batata rústica com tempero especial da casa",
       price: 35.90,
-      image: "/images/produtos/Fritas Temperada da Casa.jpg",
+      image: "/images/produtos/FritasTemperada.jpg",
       category: CATEGORIES.HAPPY_HOUR,
       subcategory: SUBCATEGORIES.PORCOES_HAPPY
     },
@@ -1710,7 +1702,7 @@ const Menu = () => {
       name: "Caipirinha Vodka Happy",
       description: "Limão ou Morango",
       price: 13.90,
-      image: "/images/produtos/Caipi Happy.jpg",
+      image: "/images/produtos/CaipiHappy.jpg",
       category: CATEGORIES.HAPPY_HOUR,
       subcategory: SUBCATEGORIES.CAIPIRINHAS_HAPPY
     },
@@ -1719,7 +1711,7 @@ const Menu = () => {
       name: "Caipirinha Cachaça Happy",
       description: "Limão ou Morango",
       price: 13.90,
-      image: "/images/produtos/Caipi Tradicional.jpg",
+      image: "/images/produtos/CaipiTrad.jpg",
       category: CATEGORIES.HAPPY_HOUR,
       subcategory: SUBCATEGORIES.CAIPIRINHAS_HAPPY
     }
@@ -1744,7 +1736,6 @@ const Menu = () => {
   const handleCategoryChange = (categoryId) => {
     setActiveCategory(categoryId);
     setActiveSubcategory(SUBCATEGORIES.TODOS);
-    // Salva imediatamente no localStorage
     localStorage.setItem('selectedCategory', categoryId);
     localStorage.setItem('selectedSubcategory', SUBCATEGORIES.TODOS);
   };
@@ -1846,7 +1837,7 @@ const Menu = () => {
   <div className="category-row row-top">
     {[CATEGORIES.TODOS, CATEGORIES.HAPPY_HOUR, CATEGORIES.ALMOCO, CATEGORIES.PORCOES].map(id => {
       const category = categories.find(c => c.id === id);
-      if (!category) return null; // segurança
+      if (!category) return null; 
       return (
         <button
           key={category.id}

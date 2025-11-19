@@ -8,7 +8,6 @@ export const usePriceFormatter = () => {
       }
       
       if (typeof price === 'string') {
-        // Se já for string, troca ponto por vírgula
         return price.replace('.', ',');
       }
       

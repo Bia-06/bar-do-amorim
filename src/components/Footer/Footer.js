@@ -128,7 +128,17 @@ const Footer = () => {
         <div className="footer-bottom">
           <p>&copy; 2025 Bar do Amorim. Todos os direitos reservados.</p>
           <p>Bar do Amorim Marília LTDA - 22.272.193/0001-72.</p>
-          <p>Desenvolvido por Beatriz Pires.</p>
+          <p>
+            Desenvolvido por{" "}
+            <a 
+              href="https://portfolio--beatriz.vercel.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="portfolio-link"
+            >
+              Beatriz Pires
+            </a>
+          </p>
         </div>
       </div>
     </footer>

@@ -69,17 +69,17 @@
   text-align: left;
 }
 
-/* Navegação (desktop) - AJUSTADO para caber todos os itens */
+/* Navegação (desktop) */
 .nav-center {
   display: flex;
-  gap: 1.5rem; /* Reduzido o gap */
+  gap: 1.5rem; 
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
-  padding: 1rem 1rem; /* Reduzido o padding */
+  padding: 1rem 1rem;
   border-radius: 50px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  flex-wrap: nowrap; /* Garante que fique em uma linha */
+  flex-wrap: nowrap; 
   justify-content: center;
   transition: all 0.3s ease;
 }
@@ -87,17 +87,17 @@
 .nav-center a {
   color: var(--light-text);
   text-decoration: none;
-  padding: 0.4rem 0.7rem; /* Reduzido o padding */
+  padding: 0.4rem 0.7rem; 
   border-radius: 25px;
   transition: all 0.3s ease;
   font-weight: 600;
-  font-size: 0.85rem; /* Fonte ligeiramente menor */
+  font-size: 0.85rem; 
   position: relative;
   overflow: hidden;
   white-space: nowrap;
   display: flex;
   align-items: center;
-  gap: 4px; /* Reduzido o gap entre ícone e texto */
+  gap: 4px; 
 }
 
 .nav-center a::before {
@@ -175,7 +175,7 @@
 
 /* ====== ÍCONES ====== */
 .header-icon {
-  width: 16px; /* Ícones ligeiramente menores */
+  width: 16px; 
   height: 16px;
   object-fit: contain;
   flex-shrink: 0;
@@ -209,13 +209,13 @@
   }
 
   .nav-center {
-    padding: 0.4rem 0.8rem; /* Ainda mais compacto */
+    padding: 0.4rem 0.8rem; 
     gap: 0.2rem;
   }
 
   .nav-center a {
     padding: 0.35rem 0.6rem;
-    font-size: 0.8rem; /* Fonte ainda menor em telas médias */
+    font-size: 0.8rem; 
   }
   
   .header-icon {
@@ -242,12 +242,12 @@
     margin-top: var(--spacing-sm);
     justify-content: center;
     border-radius: 25px;
-    gap: 0.5rem; /* Gap normal para mobile */
+    gap: 0.5rem; 
     padding: 0.6rem 1rem;
   }
 
   .nav-center a {
-    font-size: 0.85rem; /* Volta ao tamanho normal em mobile */
+    font-size: 0.85rem; 
     padding: 0.5rem 0.8rem;
   }
 
@@ -257,18 +257,12 @@
   }
 }
 
-/* =================================================
-   ====== AQUI COMEÇA O RESPONSIVO DE VERDADE ======
-   ====== (apenas mobile, não mexe no desktop) =====
-   ================================================= */
 @media (max-width: 768px) {
-  /* mostra o botão hamburguer */
   .mobile-menu-btn {
     display: block;
     order: 2;
   }
 
-  /* esconde nav horizontal e vira dropdown */
   .nav-center {
     display: none;
     position: absolute;
@@ -298,7 +292,6 @@
     font-size: 0.9rem;
   }
 
-  /* some o bloco da direita no mobile */
   .header-info {
     display: none;
   }
@@ -353,14 +346,12 @@
     gap: 6px;
   }
 
-  /* ====== AQUI o que você pediu: TODOS em negrito ====== */
   .mobile-info-row-top .no-tax span,
   .mobile-info-row-top .cover-charge span,
   .mobile-info-row-bottom span {
     font-weight: 600 !important;
   }
 
-  /* garante que ícone + texto mantenham o mesmo peso */
   .mobile-info span {
     font-weight: 600 !important;
   }

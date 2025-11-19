@@ -41,7 +41,7 @@
   line-height: 1.5;
   opacity: 0.9;
   display: flex;
-  align-items: center; /* MUDANÇA: center em vez de flex-start */
+  align-items: center; 
   gap: 0.5rem;
 }
 
@@ -104,11 +104,10 @@
   transform: scale(1.1);
 }
 .social-link svg {
-  color: var(--accent-gold);   /* força ícone social a ficar dourado */
+  color: var(--accent-gold);   
   fill: currentColor;
 }
 
-/* Footer Bottom */
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 1.5rem;
@@ -150,15 +149,15 @@
   }
   
   .footer-section p {
-    justify-content: flex-start; /* MUDANÇA: alinha à esquerda */
-    text-align: left; /* MUDANÇA: texto à esquerda */
+    justify-content: flex-start; 
+    text-align: left; 
     margin-left: auto;
     margin-right: auto;
-    max-width: 280px; /* LIMITA A LARGURA */
+    max-width: 280px; 
     display: flex;
-    align-items: center; /* MANTÉM EMOJI E TEXTO NA MESMA LINHA */
+    align-items: center; 
     gap: 0.5rem;
-    flex-direction: row; /* GARANTE QUE FIQUE NA MESMA LINHA */
+    flex-direction: row; 
   }
   
   .social-links {
@@ -185,7 +184,7 @@
   
   .footer-section p {
     font-size: 0.9rem;
-    flex-direction: row; /* GARANTE EMOJI AO LADO DO TEXTO */
+    flex-direction: row; 
     align-items: center;
     justify-content: flex-start;
     text-align: left;
@@ -194,7 +193,7 @@
   
   /* ESPECIAL PARA O E-MAIL */
   .footer-section p:last-child {
-    flex-direction: row; /* MANTÉM EMOJI AO LADO DO EMAIL */
+    flex-direction: row; 
     align-items: center;
     justify-content: flex-start;
     text-align: left;
@@ -210,14 +209,14 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
-    justify-items: center;          /* força cada coluna a ficar centralizada */
+    justify-items: center;         
   }
 
   .footer-section {
     align-items: center;
     text-align: center;
     width: 100%;
-    max-width: 320px;               /* largura confortável pra leitura */
+    max-width: 320px;             
   }
 
   .footer-section h3 {
@@ -229,9 +228,9 @@
   /* cada linha de texto/contato/funcionamento */
   .footer-section p {
     display: flex;
-    align-items: flex-start;        /* ícone começa alinhado ao topo da linha */
-    justify-content: center;        /* centraliza o grupo todo (ícone + texto) */
-    text-align: left;               /* texto continua legível em múltiplas linhas */
+    align-items: flex-start;       
+    justify-content: center;      
+    text-align: left;               
     gap: 0.5rem;
     max-width: 100%;
     margin-left: 0;
@@ -301,32 +300,25 @@
     line-height: 1.3;
   }
 }
-/* Ajustes finos para mobile */
+/* Ajustes para mobile */
 @media (max-width: 768px) {
-  /* Centraliza melhor a linha longa do endereço */
   .footer-section:nth-child(1) p:last-child {
     text-align: center;
     justify-content: center;
     line-height: 1.4;
-    white-space: normal; /* permite quebrar corretamente */
+    white-space: normal; 
   }
-
-  /* Corrige o alinhamento do (exceto feriados) */
   .footer-section:nth-child(2) p:last-child {
-    flex-direction: column; /* quebra a linha */
+    flex-direction: column; 
     align-items: center;
     text-align: center;
     gap: 0.2rem;
     line-height: 1.3;
   }
-
-  /* Deixa telefone e WhatsApp mais próximos do ":" */
   .footer-section:nth-child(3) p {
-    gap: 0.25rem; /* antes era 0.5rem */
+    gap: 0.25rem; 
     justify-content: center;
   }
-
-  /* Garante que o texto do contato não fique muito espaçado */
   .footer-section:nth-child(3) p span:not(.contact-icon) {
     display: inline-block;
     margin-left: 0.1rem;
@@ -334,7 +326,6 @@
 }
 
 @media (max-width: 480px) {
-  /* Ajuste adicional para telas pequenas */
   .footer-section:nth-child(2) p:last-child {
     font-size: 0.9rem;
     line-height: 1.3;
@@ -345,19 +336,17 @@
     gap: 0.2rem;
   }
 }
-/* AJUSTE FINO HAPPY HOUR MOBILE */
+/* HAPPY HOUR MOBILE */
 @media (max-width: 768px) {
-  /* Corrige apenas a linha do Happy Hour */
   .footer-section:nth-child(2) p:last-child {
-    flex-direction: row;           /* 🍺 fica na mesma linha */
-    flex-wrap: wrap;               /* permite quebrar linha se necessário */
-    justify-content: center;       /* centraliza o conjunto */
+    flex-direction: row;           
+    flex-wrap: wrap;               
+    justify-content: center;       
     text-align: center;
     line-height: 1.4;
     gap: 0.4rem;
   }
 
-  /* Centraliza o (exceto feriados) embaixo */
   .footer-section:nth-child(2) p:last-child::after {
     content: " (exceto feriados)";
     display: block;
@@ -367,12 +356,19 @@
     margin-top: 2px;
     opacity: 0.9;
   }
-
-  /* Remove o (exceto feriados) duplicado do texto original */
   .footer-section:nth-child(2) p:last-child {
     white-space: normal;
   }
   .footer-section:nth-child(2) p:last-child span:not(.contact-icon) {
     white-space: normal;
   }
+}
+.portfolio-link {
+  color: inherit; 
+  transition: color 0.3s ease; 
+}
+
+.portfolio-link:hover {
+  color: #fff; 
+  text-decoration: underline; 
 }
