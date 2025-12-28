@@ -141,11 +141,11 @@
   background: linear-gradient(135deg, var(--light-brown), var(--lighter-brown));
   color: var(--light-text);
   border: none;
-  padding: 1rem 2rem; /* Botão menor */
+  padding: 1rem 2rem; 
   border-radius: 50px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1rem; /* Fonte menor */
+  font-size: 1rem; 
   transition: all 0.3s ease;
   width: 100%;
   max-width: 300px;
@@ -260,7 +260,7 @@
   }
 
   .work-form .btn-submit {
-    padding: 0.9rem 1.5rem; /* Botão menor no mobile */
+    padding: 0.9rem 1.5rem; 
     font-size: 0.95rem;
     max-width: 280px;
   }
@@ -290,7 +290,7 @@
   }
 
   .work-form .btn-submit {
-    padding: 0.8rem 1.2rem; /* Botão ainda menor */
+    padding: 0.8rem 1.2rem; 
     font-size: 0.9rem;
     max-width: 100%;
   }
