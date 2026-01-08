@@ -236,16 +236,9 @@ const Menu = () => {
       id: 164,
       name: "Lasanha da Patroa",
       description: "Recheada com delicioso molho bolonhesa, acrescentado de molho bechamel e muita muçarela.",
+      image: "/images/produtos/lasanha.jpg",
       price: 32.00,
       category: CATEGORIES.ALMOCO,
-      subcategory: SUBCATEGORIES.ALMOCO,
-      image: "/images/produtos/lasanha.jpg",
-      details: {
-        individual: "R$ 32,00",
-        media: "Não disponível", 
-        grande: "Não disponível",
-        observacao: "Segunda à Sábado, das 17h às 23h30"
-      }
     },
     {
       id: 3,
@@ -549,16 +542,9 @@ const Menu = () => {
       id: 55,
       name: "Lasanha da Patroa",
       description: "Recheada com delicioso molho bolonhesa, acrescentado de molho bechamel e muita muçarela.",
-      price: 32.00,
-      category: CATEGORIES.ALMOCO,
-      subcategory: SUBCATEGORIES.ALMOCO,
       image: "/images/produtos/lasanha.jpg",
-      details: {
-        individual: "R$ 32,00",
-        media: "Não disponível", 
-        grande: "Não disponível",
-        observacao: "Segunda à Sábado, das 11h às 14h30"
-      }
+      price: 32.00,
+      category: CATEGORIES.JANTAR,
     },
     {
       id: 31,

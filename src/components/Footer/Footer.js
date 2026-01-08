@@ -126,7 +126,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2025 Bar do Amorim. Todos os direitos reservados.</p>
+          <p>&copy; 2026 Bar do Amorim. Todos os direitos reservados.</p>
           <p>Bar do Amorim Marília LTDA - 22.272.193/0001-72.</p>
           <p>
             Desenvolvido por{" "}
