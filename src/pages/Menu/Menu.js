@@ -185,7 +185,6 @@ const Menu = () => {
       image: '/images/categorias/aperitivo.png' 
     }
   ];
-  // Produtos organizados por categoria
   const products = useMemo(() => [
     // ALMOÇO - PRATOS PRINCIPAIS
     {
@@ -200,7 +199,7 @@ const Menu = () => {
         individual: "R$ 32,90",
         media: "Não disponível", 
         grande: "Não disponível",
-        observacao: "Quarta à Sexta, das 11h às 14h30"
+        observacao: "Disponível apenas de Sexta-Feira, das 11h às 14h30"
       }
     },
     {
@@ -231,6 +230,21 @@ const Menu = () => {
         media: "R$ 58,00", 
         grande: "R$ 130,00",
         observacao: "Segunda à Sábado, das 11h às 14h30"
+      }
+    },
+    {
+      id: 164,
+      name: "Lasanha da Patroa",
+      description: "Recheada com delicioso molho bolonhesa, acrescentado de molho bechamel e muita muçarela.",
+      price: 32.00,
+      category: CATEGORIES.ALMOCO,
+      subcategory: SUBCATEGORIES.ALMOCO,
+      image: "/images/produtos/lasanha.jpg",
+      details: {
+        individual: "R$ 32,00",
+        media: "Não disponível", 
+        grande: "Não disponível",
+        observacao: "Segunda à Sábado, das 17h às 23h30"
       }
     },
     {
@@ -532,6 +546,21 @@ const Menu = () => {
       category: CATEGORIES.JANTAR,
     },
     {
+      id: 55,
+      name: "Lasanha da Patroa",
+      description: "Recheada com delicioso molho bolonhesa, acrescentado de molho bechamel e muita muçarela.",
+      price: 32.00,
+      category: CATEGORIES.ALMOCO,
+      subcategory: SUBCATEGORIES.ALMOCO,
+      image: "/images/produtos/lasanha.jpg",
+      details: {
+        individual: "R$ 32,00",
+        media: "Não disponível", 
+        grande: "Não disponível",
+        observacao: "Segunda à Sábado, das 11h às 14h30"
+      }
+    },
+    {
       id: 31,
       name: "Filé Parmegiana",
       description: "Filé mignon empanado, coberto com mussarela, regado de um delicioso molho parmegiana, salpicado com parmesão. Acompanha batata chips, arroz branco e banana à milanesa.",
@@ -763,15 +792,6 @@ const Menu = () => {
       }
     },
     // PORÇÕES - PORÇÕES DE BOTECO
-    {
-      id: 55,
-      name: "Carne Seca Acebolada",
-      description: "Acompanha mandioca frita.",
-      price: 79.90,
-      image: "/images/produtos/CarneSeca.jpg",
-      category: CATEGORIES.PORCOES,
-      subcategory: SUBCATEGORIES.PORCOES_BOTECO,
-    },
     {
       id: 56,
       name: "Calabresa Acebolada",
